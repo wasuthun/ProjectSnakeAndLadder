@@ -1,6 +1,7 @@
 import java.util.List;
 
 public class Snake {
+
 	private Square head;
 	private Square tail;
 	
@@ -16,4 +17,5 @@ public class Snake {
 	public Square getTail() {
 		return tail;
 	}
+
 }
