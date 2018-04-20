@@ -10,6 +10,8 @@ public class Player {
 		int point = dice.getPoint();
 		//do st in array
 		collect=collect+point;
+		
+		
 	}
 	public int getCollect() {
 		return collect;
