@@ -34,5 +34,8 @@ public class Game extends Observable {
 		}
 		return false;
 	}
-
+	
+	public void start() {
+		
+	}
 }
