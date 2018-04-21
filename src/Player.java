@@ -12,7 +12,14 @@ public class Player {
 	public void move(){
 		dice.roll();
 		int point = dice.getPoint();
-		position.setX(x+point);		
+		if((x+point)%10!=0) {
+			if(x+point>10)
+				position=new Square(x+point%10, y+1);
+			else 
+				position=new Square(x+point%10, y);
+		}else {
+			position=new Square(x, y+1);
+		}
 	}
 	
 	public Square getPosition() {
