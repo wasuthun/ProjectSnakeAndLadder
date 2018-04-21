@@ -26,7 +26,10 @@ public class Player {
 				if (y % 2 == 0)
 					position = new Square(9 - ((x + point) % 20), y + 2);
 			} else
-				position = new Square(x + point % 9, y);
+				if(y%2==0)
+					position = new Square(x + point % 9, y);
+				else
+					position = new Square(x - point % 9, y);
 		} else {
 			position = new Square(x, y + 1);
 		}
