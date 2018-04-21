@@ -17,5 +17,4 @@ public class Game extends Observable{
 		return (player1.getPosition().getX()==0&&player1.getPosition().getY()==10)||(player2.getPosition().getX()==0&&player2.getPosition().getY()==10);
 	}
 	
-	
 }
