@@ -14,5 +14,4 @@ public class Game {
 		return player1.getCollect()==100||player2.getCollect()==100;
 	}
 	
-	
 }
