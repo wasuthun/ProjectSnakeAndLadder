@@ -7,7 +7,6 @@ public class Game extends Observable {
 	private List<Player> players;
 	private Board board;
 
-	// create snake and ladder
 	private Game() {
 		players = new ArrayList<Player>();
 		board = new Board();
@@ -33,6 +32,9 @@ public class Game extends Observable {
 				return true;
 		}
 		return false;
+	}
+	public void stopAtSnakeHead() {
+		
 	}
 	
 	public void start() {

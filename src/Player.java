@@ -14,25 +14,22 @@ public class Player {
 	public void move() {
 		dice.roll();
 		int point = dice.getPoint();
-		if (y % 2 == 0) {
-			if (x + point > 10)
-				position = new Square(x- point % 10, y+1);
-			else
-				position = new Square(x - point % 10, y);
+		if ((x + point) % 9 != 0) {
+			if (x + point > 9 && y % 2 == 0 && x + point < 20)
+				position = new Square(9 - ((x + point) - 10), y + 1);
+			else if ((x + point) > 9 && y % 2 == 1 && x + point < 20)
+				if (9 - (x - point + 10) > 9)
+					position = new Square(10 - (x + point) % 10, y + 2);
+				else
+					position = new Square(9 - (x - point + 10), y + 1);
+			else if (point + x > 20) {
+				if (y % 2 == 0)
+					position = new Square(9 - ((x + point) % 20), y + 2);
+			} else
+				position = new Square(x + point % 9, y);
 		} else {
-			if (x + point > 10)
-				position = new Square(x + point % 10, y+1);
-			else
-				position = new Square(x + point % 10, y);
+			position = new Square(x, y + 1);
 		}
-		// if((x+point)%10!=0) {
-		// if(x+point>10)
-		// position=new Square(x+point%10, y+1);
-		// else
-		// position=new Square(x+point%10, y);
-		// }else {
-		// position=new Square(x, y+1);
-		// }
 	}
 
 	public Square getPosition() {
