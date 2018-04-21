@@ -1,21 +1,38 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
-public class Game extends Observable{
-	private static Game game=new Game();
-	private Player player1,player2;
+public class Game extends Observable {
+	private static Game game = new Game();
+	private List<Player> players;
 	private Board board;
-	//create snake and ladder
+
+	// create snake and ladder
 	private Game() {
-		player1=new Player();
-		player2=new Player();
-		board=new Board();
+		players = new ArrayList<Player>();
+		board = new Board();
 	}
+
+	public boolean addPlayer(Player player) {
+		if (players.size() < 4) {
+			players.add(player);
+			return true;
+		}
+		return false;
+	}
+
 	public static Game getInstance() {
-		return game;	
-	} 
-	public boolean isEnd() {
-		return (player1.getPosition().getX()==0&&player1.getPosition().getY()==10)||(player2.getPosition().getX()==0&&player2.getPosition().getY()==10);
+		return game;
 	}
-	
-	
+
+	public boolean isEnd() {
+		for (Player p : players) {
+			if (p.getPosition().getX() == 9 && p.getPosition().getY() == 9)
+				return true;
+			else if (p.getPosition().getY() > 9)
+				return true;
+		}
+		return false;
+	}
+
 }
