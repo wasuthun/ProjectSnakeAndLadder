@@ -37,6 +37,7 @@ public class GameUI extends JFrame implements Observer{
 							renderer.requestFocus();
 						}
 					});
+            		add(resetGame);
             }
         }, BorderLayout.SOUTH);
 
