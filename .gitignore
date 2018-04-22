@@ -5,6 +5,7 @@
 # binaries and temp files
 *.class
 *.swp
+*.log
 bin/
 build/
 out/

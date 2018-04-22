@@ -9,7 +9,12 @@ public class Dice {
 		firstDie=rand.nextInt(6)+1;
 		secondDie=rand.nextInt(6)+1;
 	}
-	
+	public int getFirstDie() {
+		return firstDie;
+	}
+	public int getSecondDie() {
+		return secondDie;
+	}
 	public int getPoint() {
 		return secondDie+firstDie;
 	}
