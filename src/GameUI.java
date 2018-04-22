@@ -12,80 +12,91 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-
-
-
-
-public class GameUI extends JFrame implements Observer{
+public class GameUI extends JFrame implements Observer {
 
 	private Renderer renderer;
 	private JButton resetGame;
+	private JButton addPlayer;
+	private JFrame frame;
+
 	public GameUI(Game game) {
 		game.addObserver(this);
-		renderer=new Renderer();
-	
+		renderer = new Renderer();
+		frame = new JFrame("Snake and ladder");
 		setLayout(new BorderLayout());
-		add(renderer, BorderLayout.CENTER);
-        add(new JPanel() {
-            {
-            		resetGame = new JButton("reset");
-            		resetGame.addActionListener(new ActionListener() {
-						
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							game.reset();
-							renderer.requestFocus();
-						}
-					});
-            		add(resetGame);
-            }
-        }, BorderLayout.SOUTH);
+		frame.add(renderer, BorderLayout.CENTER);
+		frame.add(new JPanel() {
+			{
+				resetGame = new JButton("reset");
+				addPlayer = new JButton("Add Player");
+				resetGame.addActionListener(new ActionListener() {
 
-        pack();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        renderer.requestFocus();
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						game.reset();
+						renderer.requestFocus();
+					}
+				});
+				addPlayer.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// game.addPlayer();
+						renderer.requestFocus();
+					}
+				});
+				add(resetGame);
+			}
+		}, BorderLayout.SOUTH);
+		pack();
+		frame.setSize(700, 770);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		renderer.requestFocus();
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
-		
+
 	}
 
 }
+
 class Renderer extends JPanel {
 
-    private int blockWidth = 10;
-    private int mapSize;
+	private int blockWidth = 10;
+	private int blockSize = 7;
+	private int mapSize;
 	private Game game;
 
-    public Renderer() {
-    		game=Game.getInstance();
-        mapSize = game.getBoardSize() * blockWidth;
-        setPreferredSize(new Dimension(mapSize, mapSize));
-        setDoubleBuffered(true);
-    }
+	public Renderer() {
+		game = Game.getInstance();
+		mapSize = game.getBoardSize() * blockWidth;
+		setPreferredSize(new Dimension(mapSize, mapSize));
+		setDoubleBuffered(true);
+	}
 
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        paintGrids(g);
-        paintBlocks(g);
-    }
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		paintGrids(g);
+		paintBlocks(g);
+	}
 
-    private void paintGrids(Graphics g) {
-        g.setColor(Color.gray);
-        for (int i = 0; i < mapSize; i++) {
-            g.drawLine(i * blockWidth, 0, i * blockWidth, getHeight());
-            g.drawLine(0, i * blockWidth, getWidth(), i * blockWidth);
-        }
-    }
+	private void paintGrids(Graphics g) {
+		g.setColor(Color.gray);
+		for (int j = 0; j < blockWidth; j++) {
+			for (int i = 0; i < blockWidth; i++) {
+				g.drawRect(i * blockWidth * blockSize, j * blockWidth * blockSize, blockSize * blockWidth,
+						blockSize * blockWidth);
+			}
+		}
+	}
 
-    private void paintBlocks(Graphics g) {
-        g.setColor(Color.red);
-        for(Square b : game.getSquares()) {
-            g.fillRect(b.getX() * blockWidth, b.getY() * blockWidth, blockWidth, blockWidth);
-        }
-    }
+	private void paintBlocks(Graphics g) {
+		g.setColor(Color.red);
+		for (Square b : game.getSquares()) {
+			g.fillRect(b.getX() * blockWidth, b.getY() * blockWidth, blockWidth, blockWidth);
+		}
+	}
 }
-
-
