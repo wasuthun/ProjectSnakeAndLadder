@@ -11,7 +11,12 @@ public class Game extends Observable {
 		players = new ArrayList<Player>();
 		board = new Board();
 	}
-
+	public int getBoardSize() {
+		return board.getSize();
+	}
+	public List<Square> getSquares(){
+		return board.getSquares();
+	}
 	public boolean addPlayer(Player player) {
 		if (players.size() < 4) {
 			players.add(player);
@@ -36,8 +41,17 @@ public class Game extends Observable {
 	public void stopAtSnakeHead() {
 		
 	}
-	
 	public void start() {
-		
+		Square startPos=new Square(0, 0);
+		for (Player player : players) {
+			player.setPosition(startPos);
+		}
+		//do st
+	}
+	public void reset() {
+		Square startPos=new Square(0, 0);
+		for (Player player : players) {
+			player.setPosition(startPos);
+		}
 	}
 }

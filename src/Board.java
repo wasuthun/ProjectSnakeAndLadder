@@ -4,19 +4,19 @@ import java.util.List;
 
 
 public class Board {
-	private int size = 100;
-    private List<Square> blocks = new ArrayList<Square>();
+	private int size = 10;
+    private List<Square> square = new ArrayList<Square>();
 	
 	 public int getSize() {
 	        return size;
 	    }
 
-	    public List<Square> getBlocks() {
-	        return blocks;
+	    public List<Square> getSquares() {
+	        return square;
 	    }
 
 	    public void addBlock(Square block) {
-	        blocks.add(block);
+	        square.add(block);
 	    }
 	
 }

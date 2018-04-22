@@ -34,7 +34,9 @@ public class Player {
 			position = new Square(x, y + 1);
 		}
 	}
-
+	public void setPosition(Square square) {
+		this.position=square;
+	}
 	public Square getPosition() {
 		return position;
 	}
