@@ -9,6 +9,7 @@ public class PlayerCanPlay extends PlayerState {
 		super(player);
 	}
 
+	@Override
 	public void move() {
 		dice.roll();
 		int point = dice.getPoint();
@@ -32,6 +33,7 @@ public class PlayerCanPlay extends PlayerState {
 			position = new Square(x, y + 1);
 		}
 	}
+	
 	public void setPosition(Square square) {
 		this.position=square;
 	}

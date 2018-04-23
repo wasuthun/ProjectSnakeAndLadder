@@ -5,8 +5,9 @@ public class PlayerCanNotPlay extends PlayerState {
 		super(player);
 	}
 
+	@Override
 	public void move() {
-		
+		System.out.println("Not your turn.");
 	}
 
 	@Override

@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -85,9 +87,19 @@ class Renderer extends JPanel {
 	}
 
 	private void paintGrids(Graphics g) {
-		g.setColor(Color.gray);
+		Color blue = new Color (72, 129, 234);
+		Color red = new Color (233, 22, 64);
+		Color yellow = new Color (255, 219, 77);
+		List<Color> c = new ArrayList<Color>();
+		c.add(blue);
+		c.add(red);
+		c.add(yellow);
 		for (int j = 0; j < blockWidth; j++) {
 			for (int i = 0; i < blockWidth; i++) {
+				g.setColor(c.get(j%3));
+				g.fillRect(i * blockWidth * blockSize, j * blockWidth * blockSize, blockSize * blockWidth,
+						blockSize * blockWidth);
+				g.setColor(Color.gray);
 				g.drawRect(i * blockWidth * blockSize, j * blockWidth * blockSize, blockSize * blockWidth,
 						blockSize * blockWidth);
 			}
