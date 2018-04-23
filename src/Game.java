@@ -4,11 +4,11 @@ import java.util.Observable;
 
 public class Game extends Observable {
 	private static Game game = new Game();
-	private List<Player> players;
+	private List<PlayerStage> players;
 	private Board board;
 
 	private Game() {
-		players = new ArrayList<Player>();
+		players = new ArrayList<PlayerStage>();
 		board = new Board();
 	}
 	public int getBoardSize() {
@@ -17,7 +17,7 @@ public class Game extends Observable {
 	public List<Square> getSquares(){
 		return board.getSquares();
 	}
-	public boolean addPlayer(Player player) {
+	public boolean addPlayer(PlayerStage player) {
 		if (players.size() < 4) {
 			players.add(player);
 			return true;
@@ -30,7 +30,7 @@ public class Game extends Observable {
 	}
 
 	public boolean isEnd() {
-		for (Player p : players) {
+		for (PlayerStage p : players) {
 			if (p.getPosition().getX() == 9 && p.getPosition().getY() == 9)
 				return true;
 			else if (p.getPosition().getY() > 9)
@@ -43,14 +43,14 @@ public class Game extends Observable {
 	}
 	public void start() {
 		Square startPos=new Square(0, 0);
-		for (Player player : players) {
+		for (PlayerStage player : players) {
 			player.setPosition(startPos);
 		}
 		//do st
 	}
 	public void reset() {
 		Square startPos=new Square(0, 0);
-		for (Player player : players) {
+		for (PlayerStage player : players) {
 			player.setPosition(startPos);
 		}
 	}

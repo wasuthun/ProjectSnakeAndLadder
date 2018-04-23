@@ -1,11 +1,11 @@
 
-public class Player {
+public class PlayerCanPlay implements PlayerStage {
 	private Square position;
 	private Dice dice = new Dice();
 	private int x;
 	private int y;
 
-	public Player() {
+	public PlayerCanPlay() {
 		position = new Square(0, 0);
 		this.x = 0;
 		this.y = 0;
@@ -39,5 +39,8 @@ public class Player {
 	}
 	public Square getPosition() {
 		return position;
+	}
+	public Dice getDice(){
+		return dice;
 	}
 }

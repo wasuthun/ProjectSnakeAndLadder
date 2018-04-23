@@ -5,27 +5,30 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlayerUIController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="303.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlayerUIController">
    <children>
       <Label fx:id="turn" text="Snake and ladder game">
          <VBox.margin>
             <Insets top="20.0" />
          </VBox.margin>
       </Label>
-      <Label fx:id="point" text="Please press roll button">
+      <Label text="Please press roll button">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
       </Label>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Turn" />
+      <TextField editable="false" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1st Die" />
-      <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="textArea1" editable="false" prefHeight="200.0" prefWidth="200.0" />
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2nd Die" />
-      <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="textArea2" editable="false" prefHeight="200.0" prefWidth="200.0" />
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <ProgressBar fx:id="time" prefHeight="31.0" prefWidth="158.0" progress="0.0">
          <VBox.margin>
