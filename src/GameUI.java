@@ -43,7 +43,7 @@ public class GameUI extends JFrame implements Observer {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// game.addPlayer();
+						game.addPlayer(new Player());
 						renderer.requestFocus();
 					}
 				});

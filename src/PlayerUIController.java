@@ -26,7 +26,7 @@ public class PlayerUIController {
 	@FXML
 	private Image image; 
 	private Game game=Game.getInstance();
-	private Player player=game.getPlayer();
+	private Player player;
 
 	@FXML
 	
@@ -35,14 +35,15 @@ public class PlayerUIController {
 	}
 	@FXML
 	public void handleRoll(ActionEvent event) {
+		player = game.getPlayer();
 		player.getDice().roll();
 		int point = player.getDice().getPoint();
-		player.move(point);
+		player.move(5);
 		textField1.setText(""+player.getDice().getFirstDie());
 		textField2.setText(""+player.getDice().getSecondDie());
 		System.out.println(player.getPosition().getX());
 		System.out.println(player.getPosition().getY());
-		game.switchTurn(player);
+		game.switchTurn();
 	}
 
 }

@@ -4,27 +4,33 @@ import java.util.Observable;
 
 public class Game extends Observable {
 	private static Game game = new Game();
-	private List<Player> players;
-	private Player player1,currentPlayer;
+	private List<Player> players = new ArrayList<Player>();
+	private Player currentPlayer;
 	private Board board;
-	private int turn=0;
+	private int turn = 0;
 
 	private Game() {
-		player1 = new Player();
 		board = new Board();
 	}
-	
+
 	public int getBoardSize() {
 		return board.getSize();
 	}
-	
-	public List<Square> getSquares(){
+
+	public List<Square> getSquares() {
 		return board.getSquares();
 	}
-	
+
 	public boolean addPlayer(Player player) {
-		if (players.size() < 4) {
+		if(players.size() == 0) {
 			players.add(player);
+			currentPlayer = players.get(0);
+			System.out.println(currentPlayer.toString());
+		}
+		else if (players.size() < 4) {
+			players.add(player);
+			System.out.println("add");
+			System.out.println(players.size());
 			return true;
 		}
 		return false;
@@ -34,48 +40,51 @@ public class Game extends Observable {
 		return game;
 	}
 
-	public boolean isEnd() {
-//		for (Player p : players) {
-//			if (p.getPosition().getX() == 9 && p.getPosition().getY() == 9)
-//				return true;
-//			else if (p.getPosition().getY() > 9)
-//				return true;
-//		}
-		if (player1.getPosition().getX() == 9 && player1.getPosition().getY() == 9)
-			return true;
-		else if (player1.getPosition().getY() > 9)
-			return true;
-		return false;
-	}
-	
+//	public boolean isEnd() {
+//		// for (Player p : players) {
+//		// if (p.getPosition().getX() == 9 && p.getPosition().getY() == 9)
+//		// return true;
+//		// else if (p.getPosition().getY() > 9)
+//		// return true;
+//		// }
+////		if (player1.getPosition().getX() == 9 && player1.getPosition().getY() == 9)
+////			return true;
+////		else if (player1.getPosition().getY() > 9)
+////			return true;
+////		return false;
+//	}
+
 	public void stopAtSnakeHead() {
-		
+
 	}
-	
+
 	public void start() {
-		Square startPos =new Square(0, 0);
+		Square startPos = new Square(0, 0);
 //		for (Player player : players) {
 //			player.setPosition(startPos);
 //		}
-		player1.setPosition(startPos);
+
 	}
-	
-	public void switchTurn(Player player) {
-		if(turn%2==0) {
-			player.setState(new PlayerCanNotPlay(player));
-		}	
-		else {
-			currentPlayer=player;
-			player.setState(new PlayerCanPlay(player));
+
+	public void switchTurn() {
+		for (int i = 0; i < players.size(); i++) {
+			if (turn % players.size() == 0) {
+				players.get(i).setState(new PlayerCanNotPlay(players.get(i)));
+			} else {
+				currentPlayer = players.get(i);
+				players.get(i).setState(new PlayerCanPlay(players.get(i)));
+			}
+			System.out.println(turn);
 		}
-		System.out.println(turn);
 		turn++;
 	}
+
 	public Player getPlayer() {
 		return currentPlayer;
 	}
+
 	public void reset() {
-		Square startPos=new Square(0, 0);
+		Square startPos = new Square(0, 0);
 		for (Player player : players) {
 			player.setPosition(startPos);
 		}
