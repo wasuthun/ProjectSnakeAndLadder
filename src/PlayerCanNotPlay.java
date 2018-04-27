@@ -6,12 +6,9 @@ public class PlayerCanNotPlay extends PlayerState {
 	}
 
 	@Override
-	public void move() {
-		System.out.println("Not your turn.");
+	public boolean isTurn() {
+		System.out.println("Player2");
+		return false;
 	}
 
-	@Override
-	public void switchTurn() {
-		player.setState(new PlayerCanPlay(player));
-	}
 }

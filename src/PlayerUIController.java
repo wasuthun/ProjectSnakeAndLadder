@@ -25,8 +25,9 @@ public class PlayerUIController {
 	private ImageView imageV1;
 	@FXML
 	private Image image; 
-	
+	private Game game=Game.getInstance();
 	private Player player1=new Player();
+	private Player player2=new Player();
 	@FXML
 	
 	public void initialize() {
@@ -35,13 +36,12 @@ public class PlayerUIController {
 	@FXML
 	public void handleRoll(ActionEvent event) {
 		player1.getDice().roll();
+		int point = player1.getDice().getPoint();
+		player1.move(point);
 		textField1.setText(""+player1.getDice().getFirstDie());
 		textField2.setText(""+player1.getDice().getSecondDie());
-//		if(player1.getDice().getFirstDie()==1) {
-//			image = new Image("/face1.jpg");
-//		} 
-//		
-//		imageV1=new ImageView();
-//		imageV1.setImage(image);
+		System.out.println(player1.getPosition().getX());
+		System.out.println(player1.getPosition().getY());
+		game.switchTurn(player1);
 	}
 }

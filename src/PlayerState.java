@@ -5,6 +5,5 @@ public abstract class PlayerState {
 	public PlayerState(Player player) {
 		this.player = player;
 	}
-	public abstract void move();
-	public abstract void switchTurn();
+	public abstract boolean isTurn();
 }

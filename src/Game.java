@@ -5,10 +5,12 @@ import java.util.Observable;
 public class Game extends Observable {
 	private static Game game = new Game();
 	private List<Player> players;
+	private Player player1;
 	private Board board;
+	private int turn=0;
 
 	private Game() {
-		players = new ArrayList<Player>();
+		player1 = new Player();
 		board = new Board();
 	}
 	
@@ -33,12 +35,16 @@ public class Game extends Observable {
 	}
 
 	public boolean isEnd() {
-		for (Player p : players) {
-			if (p.getPosition().getX() == 9 && p.getPosition().getY() == 9)
-				return true;
-			else if (p.getPosition().getY() > 9)
-				return true;
-		}
+//		for (Player p : players) {
+//			if (p.getPosition().getX() == 9 && p.getPosition().getY() == 9)
+//				return true;
+//			else if (p.getPosition().getY() > 9)
+//				return true;
+//		}
+		if (player1.getPosition().getX() == 9 && player1.getPosition().getY() == 9)
+			return true;
+		else if (player1.getPosition().getY() > 9)
+			return true;
 		return false;
 	}
 	
@@ -48,9 +54,21 @@ public class Game extends Observable {
 	
 	public void start() {
 		Square startPos =new Square(0, 0);
-		for (Player player : players) {
-			player.setPosition(startPos);
+//		for (Player player : players) {
+//			player.setPosition(startPos);
+//		}
+		player1.setPosition(startPos);
+	}
+	
+	public void switchTurn(Player player) {
+		if(turn%2==0) {
+			player.setState(new PlayerCanNotPlay(player));
+		}	
+		else {
+			player.setState(new PlayerCanPlay(player));
 		}
+		System.out.println(turn);
+		turn++;
 	}
 	
 	public void reset() {
