@@ -5,7 +5,7 @@ import java.util.Observable;
 public class Game extends Observable {
 	private static Game game = new Game();
 	private List<Player> players;
-	private Player player1;
+	private Player player1,currentPlayer;
 	private Board board;
 	private int turn=0;
 
@@ -65,12 +65,15 @@ public class Game extends Observable {
 			player.setState(new PlayerCanNotPlay(player));
 		}	
 		else {
+			currentPlayer=player;
 			player.setState(new PlayerCanPlay(player));
 		}
 		System.out.println(turn);
 		turn++;
 	}
-	
+	public Player getPlayer() {
+		return currentPlayer;
+	}
 	public void reset() {
 		Square startPos=new Square(0, 0);
 		for (Player player : players) {
