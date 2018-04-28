@@ -8,7 +8,7 @@ public class Game extends Observable {
 	private Player currentPlayer;
 	private Board board;
 	private Dice dice = new Dice();
-	private int turn = 0;
+	private int turn = 1;
 
 	private Game() {
 		board = new Board();
@@ -26,6 +26,7 @@ public class Game extends Observable {
 		if(players.size() == 0) {
 			players.add(player);
 			currentPlayer = players.get(0);
+			return true;
 		}
 		else if (players.size() < 4) {
 			players.add(player);
@@ -66,15 +67,22 @@ public class Game extends Observable {
 
 	public void switchTurn() {
 		for (int i = 0; i < players.size(); i++) {
-			if (turn % players.size() == 0) {
-				players.get(i).setState(new PlayerCanNotPlay(players.get(i)));
-			} else {
+//			if (turn % players.size() == 1) {
+//				players.get(i).setState(new PlayerCanNotPlay(players.get(i)));
+//			} else {
+//				currentPlayer = players.get(i);
+//				System.out.println("switch");
+//				players.get(i).setState(new PlayerCanPlay(players.get(i)));
+//			}
+			if (turn % players.size() == i) {
 				currentPlayer = players.get(i);
-				System.out.println("switch");
 				players.get(i).setState(new PlayerCanPlay(players.get(i)));
+			} else {
+				System.out.println("switch");
+				players.get(i).setState(new PlayerCanNotPlay(players.get(i)));
 			}
 		}
-		System.out.println(turn);
+		System.out.println("turn"+turn);
 		turn++;
 	}
 

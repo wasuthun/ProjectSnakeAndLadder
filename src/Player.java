@@ -58,7 +58,6 @@ public class Player {
 		}
 		//ขวาเปลี่ยนแถว
 		else if(position.getX()-point<0&&position.getY()%2==1&&-(position.getX()-point)-1<10) {
-			System.out.println("jj");
 			position.setX(-(position.getX()-point)-1);
 			position.setY(position.getY()+1);
 		}
