@@ -1,9 +1,7 @@
 
 public class Player {
 	private PlayerState state;
-	private Dice dice = new Dice();
 	private Square position;
-	
 
 	public Player() {
 		this.state = new PlayerCanPlay(this);
@@ -15,7 +13,6 @@ public class Player {
 	}
 
 	public void move(int point) {
-		System.out.println(state);
 		if(this.state.isTurn() == false) return;
 //		if ((position.getX() + point) % 10 != 0) {
 //			System.out.println("ssss"+(point+position.getX()));
@@ -85,7 +82,4 @@ public class Player {
 		return position;
 	}
 
-	public Dice getDice() {
-		return dice;
-	}
 }

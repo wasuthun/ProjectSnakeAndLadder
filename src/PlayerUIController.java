@@ -36,17 +36,20 @@ public class PlayerUIController {
 	@FXML
 	public void handleRoll(ActionEvent event) {
 		player = game.getPlayer();
-		player.getDice().roll();
-		int point = player.getDice().getPoint();
-		player.move(12);
-		System.out.println(player.getPosition().getX());
-		System.out.println(player.getPosition().getY());
-		player.move(7);
-		textField1.setText(""+player.getDice().getFirstDie());
-		textField2.setText(""+player.getDice().getSecondDie());
-		System.out.println(player.getPosition().getX());
-		System.out.println(player.getPosition().getY());
-		player.move(12);
+		game.getDice().roll();
+		int point = game.getDice().getPoint();
+//		player.move(12);
+//		System.out.println(player.getPosition().getX());
+//		System.out.println(player.getPosition().getY());
+//		player.move(7);
+		textField1.setText(""+game.getDice().getFirstDie());
+		textField2.setText(""+game.getDice().getSecondDie());
+//		System.out.println(player.getPosition().getX());
+//		System.out.println(player.getPosition().getY());
+//		player.move(12);
+//		System.out.println(player.getPosition().getX());
+//		System.out.println(player.getPosition().getY());
+		player.move(point);
 		System.out.println(player.getPosition().getX());
 		System.out.println(player.getPosition().getY());
 		game.switchTurn();

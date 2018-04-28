@@ -7,7 +7,6 @@ public class PlayerCanPlay extends PlayerState {
 
 	@Override
 	public boolean isTurn() {
-		System.out.println("player1");
 		return turn;
 	}
 }

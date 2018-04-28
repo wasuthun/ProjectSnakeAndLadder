@@ -94,11 +94,14 @@ class Renderer extends JPanel {
 		c.add(blue);
 		c.add(red);
 		c.add(yellow);
+		int picker = 0;
 		for (int j = 0; j < blockWidth; j++) {
 			for (int i = 0; i < blockWidth; i++) {
-				g.setColor(c.get(j%3));
+				if(picker >= 3) picker = 0;
+				g.setColor(c.get(picker));
 				g.fillRect(i * blockWidth * blockSize, j * blockWidth * blockSize, blockSize * blockWidth,
 						blockSize * blockWidth);
+				picker++;
 				g.setColor(Color.gray);
 				g.drawRect(i * blockWidth * blockSize, j * blockWidth * blockSize, blockSize * blockWidth,
 						blockSize * blockWidth);
