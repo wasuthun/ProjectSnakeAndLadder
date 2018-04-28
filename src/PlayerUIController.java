@@ -38,9 +38,15 @@ public class PlayerUIController {
 		player = game.getPlayer();
 		player.getDice().roll();
 		int point = player.getDice().getPoint();
-		player.move(5);
+		player.move(12);
+		System.out.println(player.getPosition().getX());
+		System.out.println(player.getPosition().getY());
+		player.move(7);
 		textField1.setText(""+player.getDice().getFirstDie());
 		textField2.setText(""+player.getDice().getSecondDie());
+		System.out.println(player.getPosition().getX());
+		System.out.println(player.getPosition().getY());
+		player.move(12);
 		System.out.println(player.getPosition().getX());
 		System.out.println(player.getPosition().getY());
 		game.switchTurn();

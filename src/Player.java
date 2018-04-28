@@ -3,8 +3,7 @@ public class Player {
 	private PlayerState state;
 	private Dice dice = new Dice();
 	private Square position;
-	private int x;
-	private int y;
+	
 
 	public Player() {
 		this.state = new PlayerCanPlay(this);
@@ -18,24 +17,63 @@ public class Player {
 	public void move(int point) {
 		System.out.println(state);
 		if(this.state.isTurn() == false) return;
-		if ((x + point) % 9 != 0) {
-			if (x + point > 9 && y % 2 == 0 && x + point < 20)
-				position = new Square(9 - ((x + point) - 10), y + 1);
-			else if ((x + point) > 9 && y % 2 == 1 && x + point < 20)
-				if (9 - (x - point + 10) > 9)
-					position = new Square(10 - (x + point) % 10, y + 2);
-				else
-					position = new Square(9 - (x - point + 10), y + 1);
-			else if (point + x > 20) {
-				if (y % 2 == 0)
-					position = new Square(9 - ((x + point) % 20), y + 2);
-			} else if (y % 2 == 0) {
-				position = new Square(x + point % 9, y);
-				System.out.println("ssss");
-			} else
-				position = new Square(x - point % 9, y);
-		} else {
-			position = new Square(x, y + 1);
+//		if ((position.getX() + point) % 10 != 0) {
+//			System.out.println("ssss"+(point+position.getX()));
+//			//เดินช่องแรก
+//			if ((position.getX() + point > 9)&& (position.getY() % 2==0) && (position.getX() + point < 20)) {
+//				System.out.println("sss");
+//				position = new Square(9 - ((position.getX() + point) - 10), position.getY() + 1);
+//			}
+//			else if ((position.getX() + point) > 9 && position.getY() % 2 == 1 && position.getX() + point < 20)
+//				if (9 - (position.getX() - point + 10) > 9)
+//					position = new Square(10 - (position.getX() + point) % 10, position.getY() + 2);
+//				else
+//					position = new Square(9 - (position.getX() - point + 10), position.getY() + 1);
+//			else if (point + position.getX() > 20) {
+//				System.out.println("ssss"+(point+position.getX()));
+//				if (position.getY() % 2 == 0)
+//					position = new Square(9 - ((position.getX() + point) % 20), position.getY() + 2);
+//				else
+//					position =new Square(1+(position.getX()+point) % 10, position.getY() + 1);
+//			} else if (position.getY() % 2 == 0) {
+//				position = new Square(position.getX() + point % 10, position.getY());
+//			} else {
+//				position = new Square(position.getX() - point % 9, position.getY());
+//			}
+//			} else {
+//			if(position.getY()%2==1)	
+//				position = new Square((point-position.getX()-1), position.getY() + 1);
+//			else
+//				position = new Square(9-position.getX(), position.getY() + 1);
+//		}
+		//เดินทางซ้ายแบบไม่เปลี่ยนแถว
+		if(position.getX()+point<10&&position.getY()%2==0) {
+			position.setX(position.getX()+point);
+		}
+		//ซ้ายเปลี่ยนแถว
+		else if(position.getX()+point>9&&position.getY()%2==0&&position.getX()+point<20) {
+			position.setX(9-(position.getX()+point-10));
+			position.setY(position.getY()+1);
+		}
+		//ขวา
+		else if(position.getX()-point>=0&&position.getY()%2==1) {
+			position.setX(position.getX()-point);
+		}
+		//ขวาเปลี่ยนแถว
+		else if(position.getX()-point<0&&position.getY()%2==1&&-(position.getX()-point)-1<10) {
+			System.out.println("jj");
+			position.setX(-(position.getX()-point)-1);
+			position.setY(position.getY()+1);
+		}
+		//เดินซ้ายขึ้น2แถว 
+		else if(position.getX()+point>19&&position.getY()%2==0) {
+			position.setX(point+position.getX()-20);
+			position.setY(position.getY()+2);
+		}
+		//ขวาขึ้น2แถว 
+		else if(-(position.getX()-point)-1>9&&position.getY()%2==1&&position.getX()-point<0) {
+			position.setX(8+position.getX());
+			position.setY(position.getY()+2);
 		}
 	}
 	
