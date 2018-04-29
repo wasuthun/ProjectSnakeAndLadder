@@ -146,10 +146,14 @@ public class Game extends Observable {
 		return currentPlayer;
 	}
 
-	public void reset() {
+	public void restart() {
 		turn=1;
 		for (Player player : players) {
 			player.setPosition(new Square(0, 0));
+		}
+		running=true;
+		if (!gameThread.isAlive()) {
+			new Thread(gameThread).start();
 		}
 	}
 	

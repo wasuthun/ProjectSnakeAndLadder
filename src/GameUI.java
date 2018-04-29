@@ -18,7 +18,7 @@ import javax.swing.WindowConstants;
 public class GameUI extends JFrame implements Observer {
 
 	private Renderer renderer;
-	private JButton resetGame;
+	private JButton restartGame;
 	private JButton addPlayer;
 	private JFrame frame;
 	private Image image;
@@ -31,13 +31,13 @@ public class GameUI extends JFrame implements Observer {
 		frame.add(renderer, BorderLayout.CENTER);
 		frame.add(new JPanel() {
 			{
-				resetGame = new JButton("reset");
+				restartGame = new JButton("restart");
 				addPlayer = new JButton("Add Player");
-				resetGame.addActionListener(new ActionListener() {
+				restartGame.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						game.reset();
+						game.restart();
 						renderer.requestFocus();
 					}
 				});
@@ -49,7 +49,7 @@ public class GameUI extends JFrame implements Observer {
 						renderer.requestFocus();
 					}
 				});
-				add(resetGame);
+				add(restartGame);
 				add(addPlayer);
 			}
 		}, BorderLayout.SOUTH);
