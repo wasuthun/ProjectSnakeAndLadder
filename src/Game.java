@@ -147,9 +147,9 @@ public class Game extends Observable {
 	}
 
 	public void reset() {
-		Square startPos = new Square(0, 0);
+		turn=1;
 		for (Player player : players) {
-			player.setPosition(startPos);
+			player.setPosition(new Square(0, 0));
 		}
 	}
 	
