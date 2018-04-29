@@ -22,6 +22,8 @@ public class PlayerUIController {
 	@FXML
 	private TextField textField2;
 	@FXML
+	private TextField textField3;
+	@FXML
 	private ImageView imageV1;
 	@FXML
 	private Image image; 
@@ -36,6 +38,7 @@ public class PlayerUIController {
 	@FXML
 	public void handleRoll(ActionEvent event) {
 		player = game.getPlayer();
+		textField3.setText("player "+(game.getPlayerList().indexOf(player)+1));
 		game.getDice().roll();
 		int point = game.getDice().getPoint();
 //		player.move(12);

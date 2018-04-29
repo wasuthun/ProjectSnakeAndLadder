@@ -116,13 +116,15 @@ class Renderer extends JPanel {
 		Color green = new Color(154, 205, 50);
 		Color gray = new Color(217, 217, 217);
 		Color purple = new Color (191, 128, 255);
+		Color black =new Color(0, 0, 0);
 		List<Color> c = new ArrayList<Color>();
 		c.add(green);
 		c.add(gray);
 		c.add(purple);
+		c.add(black);
 		int picker = 0;
 		for (Square b : game.getSquares()) {
-			if (picker >= 3)
+			if (picker >= 4)
 				picker = 0;
 			g.setColor(c.get(picker));
 			g.fillOval(b.getX() * blockWidth * blockSize, b.getY() * blockWidth * blockSize, blockWidth * blockSize,

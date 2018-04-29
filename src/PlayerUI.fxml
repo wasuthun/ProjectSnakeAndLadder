@@ -23,7 +23,7 @@
          </VBox.margin>
       </Label>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Turn" />
-      <TextField editable="false" />
+      <TextField fx:id="textField3" alignment="CENTER" editable="false" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1st Die" />
       <TextField fx:id="textField1" alignment="CENTER">
          <font>

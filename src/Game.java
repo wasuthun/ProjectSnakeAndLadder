@@ -139,4 +139,7 @@ public class Game extends Observable {
 	public Dice getDice() {
 		return dice;
 	}
+	public List<Player> getPlayerList(){
+		return players;
+	}
 }
