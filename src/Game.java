@@ -10,6 +10,8 @@ public class Game extends Observable {
 	private Dice dice = new Dice();
 	private int turn = 1;
 	private boolean running=true;
+	private Snake snake;
+	private Ladder ladder;
 	private Thread gameThread = new Thread() {
 	        @Override
 	        public void run() {
@@ -23,7 +25,9 @@ public class Game extends Observable {
 	private Game() {
 		board = new Board();
 		//snake
+		snake =new Snake(new Square(6, 7),new Square(1, 2));
 		//ladder
+		 ladder =new Ladder(new Square(3, 4), new Square(5, 6));
 		updateBoard();
 	}
 	private void oneGameLoop() {
@@ -40,6 +44,16 @@ public class Game extends Observable {
 	        }
 	}
 	private void gamelogic() {
+		for (Player player : players) {
+			if(player.getPosition().getX()==snake.getHead().getX()&&player.getPosition().getY()==snake.getHead().getY()) {
+				player.setPosition(snake.getTail());
+			}else if(player.getPosition().getX()==ladder.getBottom().getX()&&player.getPosition().getY()==ladder.getBottom().getY()) {
+				player.setPosition(ladder.getTop());
+			}
+			if(player.getPosition().getY()>9) {
+				this.end();
+			}
+		}
 		updateBoard();
 		
 	}
