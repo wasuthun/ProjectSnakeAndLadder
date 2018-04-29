@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class GameUI extends JFrame implements Observer {
 	private JButton resetGame;
 	private JButton addPlayer;
 	private JFrame frame;
+	private Image image;
 
 	public GameUI(Game game) {
 		game.addObserver(this);
@@ -87,9 +89,9 @@ class Renderer extends JPanel {
 	}
 
 	private void paintGrids(Graphics g) {
-		Color blue = new Color (72, 129, 234);
-		Color red = new Color (233, 22, 64);
-		Color yellow = new Color (255, 219, 77);
+		Color blue = new Color(72, 129, 234);
+		Color red = new Color(233, 22, 64);
+		Color yellow = new Color(255, 219, 77);
 		List<Color> c = new ArrayList<Color>();
 		c.add(blue);
 		c.add(red);
@@ -97,7 +99,8 @@ class Renderer extends JPanel {
 		int picker = 0;
 		for (int j = 0; j < blockWidth; j++) {
 			for (int i = 0; i < blockWidth; i++) {
-				if(picker >= 3) picker = 0;
+				if (picker >= 3)
+					picker = 0;
 				g.setColor(c.get(picker));
 				g.fillRect(i * blockWidth * blockSize, j * blockWidth * blockSize, blockSize * blockWidth,
 						blockSize * blockWidth);
@@ -110,9 +113,22 @@ class Renderer extends JPanel {
 	}
 
 	private void paintBlocks(Graphics g) {
-		g.setColor(Color.black);
+		Color green = new Color(154, 205, 50);
+		Color gray = new Color(217, 217, 217);
+		Color purple = new Color (191, 128, 255);
+		List<Color> c = new ArrayList<Color>();
+		c.add(green);
+		c.add(gray);
+		c.add(purple);
+		int picker = 0;
 		for (Square b : game.getSquares()) {
-			g.fillRect(b.getX() * blockWidth, b.getY() * blockWidth, blockWidth, blockWidth);
+			if (picker >= 3)
+				picker = 0;
+			g.setColor(c.get(picker));
+			g.fillOval(b.getX() * blockWidth * blockSize, b.getY() * blockWidth * blockSize, blockWidth * blockSize,
+					blockWidth * blockSize);
+
+			picker++;
 		}
 	}
 }
