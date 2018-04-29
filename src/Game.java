@@ -27,7 +27,7 @@ public class Game extends Observable {
 		//snake
 		snake =new Snake(new Square(6, 7),new Square(1, 2));
 		//ladder
-		 ladder =new Ladder(new Square(3, 4), new Square(5, 6));
+		 ladder =new Ladder(new Square(5, 6), new Square(3, 4));
 		updateBoard();
 	}
 	private void oneGameLoop() {
@@ -46,11 +46,14 @@ public class Game extends Observable {
 	private void gamelogic() {
 		for (Player player : players) {
 			if(player.getPosition().getX()==snake.getHead().getX()&&player.getPosition().getY()==snake.getHead().getY()) {
+				System.out.println("snake!!");
 				player.setPosition(snake.getTail());
 			}else if(player.getPosition().getX()==ladder.getBottom().getX()&&player.getPosition().getY()==ladder.getBottom().getY()) {
+				System.out.println("ladder!!");
 				player.setPosition(ladder.getTop());
 			}
-			if(player.getPosition().getY()>9) {
+			
+			if((player.getPosition().getY()>9)||(player.getPosition().getX()==0&&player.getPosition().getY()==9)) {
 				this.end();
 			}
 		}
@@ -131,7 +134,7 @@ public class Game extends Observable {
 				currentPlayer = players.get(i);
 				players.get(i).setState(new PlayerCanPlay(players.get(i)));
 			} else {
-				System.out.println("switch");
+			//	System.out.println("switch");
 				players.get(i).setState(new PlayerCanNotPlay(players.get(i)));
 			}
 		}
