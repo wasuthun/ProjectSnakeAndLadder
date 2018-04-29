@@ -9,11 +9,46 @@ public class Game extends Observable {
 	private Board board;
 	private Dice dice = new Dice();
 	private int turn = 1;
+	private boolean running=true;
+	private Thread gameThread = new Thread() {
+	        @Override
+	        public void run() {
+	            super.run();
+	            while(running) {
+	                oneGameLoop();
+	            }
+	        }
+	    };
 
 	private Game() {
 		board = new Board();
+		//snake
+		//ladder
+		updateBoard();
 	}
-
+	private void oneGameLoop() {
+		gamelogic();
+		setChanged();
+		notifyObservers();
+		delay();
+	}
+	private void delay() {
+		 try {
+	            Thread.sleep(200);
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+	}
+	private void gamelogic() {
+		updateBoard();
+		
+	}
+	public void updateBoard() {
+		board.getSquares().clear();
+		for (Player player : players) {
+			board.getSquares().add(player.getPosition());
+		}
+	}
 	public int getBoardSize() {
 		return board.getSize();
 	}
@@ -58,13 +93,16 @@ public class Game extends Observable {
 	}
 
 	public void start() {
-		Square startPos = new Square(0, 0);
-//		for (Player player : players) {
-//			player.setPosition(startPos);
-//		}
-
+		running=true;
+		gameThread.start();
 	}
+    public void end() {
+        running = false;
+    }
 
+    public boolean isOver() {
+        return !running;
+    }
 	public void switchTurn() {
 		for (int i = 0; i < players.size(); i++) {
 //			if (turn % players.size() == 1) {
@@ -75,6 +113,7 @@ public class Game extends Observable {
 //				players.get(i).setState(new PlayerCanPlay(players.get(i)));
 //			}
 			if (turn % players.size() == i) {
+				System.out.println("player "+(i+1));
 				currentPlayer = players.get(i);
 				players.get(i).setState(new PlayerCanPlay(players.get(i)));
 			} else {

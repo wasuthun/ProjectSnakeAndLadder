@@ -60,7 +60,7 @@ public class GameUI extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-
+		renderer.repaint();
 	}
 
 }
@@ -110,7 +110,7 @@ class Renderer extends JPanel {
 	}
 
 	private void paintBlocks(Graphics g) {
-		g.setColor(Color.red);
+		g.setColor(Color.black);
 		for (Square b : game.getSquares()) {
 			g.fillRect(b.getX() * blockWidth, b.getY() * blockWidth, blockWidth, blockWidth);
 		}
