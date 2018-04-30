@@ -2,7 +2,6 @@
 public class Player {
 	private PlayerState state;
 	private Square position;
-
 	public Player() {
 		this.state = new PlayerCanPlay(this);
 		position = new Square(0,0);
@@ -55,7 +54,6 @@ public class Player {
 			position.setY(position.getY()+2);
 		}
 	}
-	
 	public void setPosition(Square square) {
 		this.position = square;
 	}
