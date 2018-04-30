@@ -31,7 +31,7 @@ public class Game extends Observable {
 		snake =new Snake(new Square(6, 7),new Square(1, 2));
 		//ladder
 		 ladder =new Ladder(new Square(5, 6), new Square(3, 4));
-		 fs=new FreezeSquare(2, 2);
+		 fs=new FreezeSquare(0, 0);
 		updateBoard();
 	}
 	private void oneGameLoop() {
@@ -164,6 +164,7 @@ public class Game extends Observable {
 	public void restart() {
 		turn=1;
 		count=0;
+		freeze=true;
 		for (Player player : players) {
 			player.setPosition(new Square(0, 0));
 		}
