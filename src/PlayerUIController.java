@@ -22,40 +22,51 @@ public class PlayerUIController {
 	@FXML
 	private TextField textField2;
 	@FXML
-	private TextField textField3;
-	@FXML
-	private ImageView imageV1;
-	@FXML
-	private Image image; 
-	private Game game=Game.getInstance();
+	private ImageView face;
+	private Game game = Game.getInstance();
 	private Player player;
 
 	@FXML
-	
+
 	public void initialize() {
 		roll.setOnAction(this::handleRoll);
 	}
+
 	@FXML
 	public void handleRoll(ActionEvent event) {
 		player = game.getPlayer();
-		textField3.setText("player "+(game.getPlayerList().indexOf(player)+1));
+		textField2.setText("player " + (game.getPlayerList().indexOf(player) + 1));
 		game.getDice().roll();
 		int point = game.getDice().getPoint();
-//		player.move(12);
-//		System.out.println(player.getPosition().getX());
-//		System.out.println(player.getPosition().getY());
-//		player.move(7);
-		textField1.setText(""+game.getDice().getFirstDie());
-		textField2.setText(""+game.getDice().getSecondDie());
-//		System.out.println(player.getPosition().getX());
-//		System.out.println(player.getPosition().getY());
-//		player.move(12);
-//		System.out.println(player.getPosition().getX());
-//		System.out.println(player.getPosition().getY());
+		// player.move(12);
+		// System.out.println(player.getPosition().getX());
+		// System.out.println(player.getPosition().getY());
+		// player.move(7);
+		textField1.setText("" + point);
+		setFace(point);
+		// System.out.println(player.getPosition().getX());
+		// System.out.println(player.getPosition().getY());
+		// player.move(12);
+		// System.out.println(player.getPosition().getX());
+		// System.out.println(player.getPosition().getY());
 		player.move(point);
 		System.out.println(player.getPosition().getX());
 		System.out.println(player.getPosition().getY());
 		game.switchTurn();
 	}
 
+	private void setFace(int point) {
+		if (point == 1)
+			face.setImage(new Image("Image/1.png"));
+		else if(point == 2)
+			face.setImage(new Image("Image/2.png"));
+		else if(point == 3)
+			face.setImage(new Image("Image/3.png"));
+		else if(point == 4)
+			face.setImage(new Image("Image/4.png"));
+		else if(point == 5)
+			face.setImage(new Image("Image/5.png"));
+		else if(point == 6)
+			face.setImage(new Image("Image/6.png"));
+	}
 }
