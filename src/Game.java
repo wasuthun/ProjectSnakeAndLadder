@@ -163,4 +163,6 @@ public class Game extends Observable {
 	public List<Player> getPlayerList(){
 		return players;
 	}
+	
+
 }
