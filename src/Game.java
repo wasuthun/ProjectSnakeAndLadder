@@ -12,6 +12,9 @@ public class Game extends Observable {
 	private boolean running=true;
 	private Snake snake;
 	private Ladder ladder;
+	private boolean freeze=true;
+	private int count=0;
+	private FreezeSquare fs;
 	private Thread gameThread = new Thread() {
 	        @Override
 	        public void run() {
@@ -28,6 +31,7 @@ public class Game extends Observable {
 		snake =new Snake(new Square(6, 7),new Square(1, 2));
 		//ladder
 		 ladder =new Ladder(new Square(5, 6), new Square(3, 4));
+		 fs=new FreezeSquare(2, 2);
 		updateBoard();
 	}
 	private void oneGameLoop() {
@@ -51,8 +55,19 @@ public class Game extends Observable {
 			}else if(player.getPosition().getX()==ladder.getBottom().getX()&&player.getPosition().getY()==ladder.getBottom().getY()) {
 				System.out.println("ladder!!");
 				player.setPosition(ladder.getTop());
+			}else if(player.getPosition().getX()==fs.getX()&&player.getPosition().getY()==fs.getY()){
+				if(freeze) {
+					count=turn;
+					freeze=false;
+//					System.out.println("============");
+//					System.out.println("cccccc  "+count);
+				}
+				player.setState(new PlayerCanNotPlay(player));
+				if(count+2*players.size()-1==turn) {
+					//System.out.println("ss");
+					player.setState(new PlayerCanPlay(player));
+				}
 			}
-			
 			if((player.getPosition().getY()>9)||(player.getPosition().getX()==0&&player.getPosition().getY()==9)) {
 				this.end();
 			}
@@ -148,6 +163,8 @@ public class Game extends Observable {
 
 	public void restart() {
 		turn=1;
+		count=0;
+		freeze=true;
 		for (Player player : players) {
 			player.setPosition(new Square(0, 0));
 		}
