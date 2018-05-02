@@ -29,19 +29,19 @@ public class Game extends Observable {
 		board = new Board();
 		snake=new ArrayList<>();
 		ladder=new ArrayList<>();
-		snake.add(new Snake(new Square(4, 3), new Square(4, 0)));
-		snake.add(new Snake(new Square(8, 4), new Square(6, 0)));
-		snake.add(new Snake(new Square(4, 5), new Square(8, 0)));
-		snake.add(new Snake(new Square(1, 8), new Square(0, 1)));
-		snake.add(new Snake(new Square(5, 9), new Square(2, 3)));
-		snake.add(new Snake(new Square(6, 8), new Square(5, 6)));
+		snake.add(new Snake(new Square(5,0), new Square(2, 6)));
+		snake.add(new Snake(new Square(1, 1), new Square(0, 8)));
+		snake.add(new Snake(new Square(6, 1), new Square(5, 3)));
+		snake.add(new Snake(new Square(4, 4), new Square(8, 9)));
+		snake.add(new Snake(new Square(8, 5), new Square(6, 9)));
+		snake.add(new Snake(new Square(4, 6), new Square(4, 9)));
 		// ladder
-		ladder.add(new Ladder(new Square(1, 4), new Square(2, 2)));
+		ladder.add(new Ladder(new Square(9, 0), new Square(8, 3)));
+		ladder.add(new Ladder(new Square(2, 1), new Square(1, 3)));
+		ladder.add(new Ladder(new Square(5, 1), new Square(7, 5)));
+		ladder.add(new Ladder(new Square(1, 5), new Square(2, 7)));
 		ladder.add(new Ladder(new Square(5, 3), new Square(4, 0)));
-		ladder.add(new Ladder(new Square(9, 4), new Square(8, 0)));
-		ladder.add(new Ladder(new Square(5, 8), new Square(7, 4)));
-		ladder.add(new Ladder(new Square(2, 8), new Square(1, 6)));
-		ladder.add(new Ladder(new Square(9, 9), new Square(8, 6)));
+		ladder.add(new Ladder(new Square(9, 5), new Square(8, 0)));
 		fs = new FreezeSquare(2, 2);
 		updateBoard();
 	}
