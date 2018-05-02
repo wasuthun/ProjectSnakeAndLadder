@@ -10,8 +10,8 @@ public class Game extends Observable {
 	private Dice dice = new Dice();
 	private int turn = 1;
 	private boolean running = true;
-	private List<Ladder> ladder;
-	private List<Snake> snake;
+	private List<Ladder> ladder = new ArrayList<Ladder>();
+	private List<Snake> snake = new ArrayList<Snake>();
 	private boolean freeze = true;
 	private int count = 0;
 	private FreezeSquare fs;
