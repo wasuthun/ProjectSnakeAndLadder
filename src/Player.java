@@ -33,7 +33,6 @@ public class Player {
 		//ซ้ายเปลี่ยนแถว
 		else if(position.getX()-point<0&&position.getY()%2==1&&-(position.getX()-point)-1<10) {
 			if(position.getY()==9&&position.getX()-point<=0) {
-				System.out.println("end!!");
 				position.setX(0);
 				position.setY(9);
 			}else {
@@ -44,7 +43,6 @@ public class Player {
 		//เดินขวาขึ้น2แถว 
 		else if(position.getX()+point>19&&position.getY()%2==0) {
 			if(position.getY()==8&&(position.getX()>7)&&point>10) {
-				System.out.println("end!!");
 				position.setX(0);
 				position.setY(9);
 			}else {
