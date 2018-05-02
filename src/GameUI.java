@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -20,14 +21,19 @@ public class GameUI implements Observer {
 	private JFrame frame;
 	private Renderer renderer = new Renderer();
 	private Image image;
+	private Image player1;
 
 	public GameUI(Game game) {
+		game.addObserver(this);
+		
 		frame = new JFrame("Snake and ladder");
 		ImageIcon imageIcon = new ImageIcon("src/8153987.jpg");
 		image = imageIcon.getImage().getScaledInstance(500, 501, java.awt.Image.SCALE_SMOOTH);
-		JLabel label = new JLabel(new ImageIcon(image));
+		ImageIcon imageIcon2 = new ImageIcon("src/player1.png");
+		player1 = imageIcon2.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+		//JLabel label = new JLabel(new ImageIcon(image));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(label);
+		//frame.getContentPane().add(label);
 		frame.pack();
 		frame.setVisible(true);
 		frame.setLayout(new BorderLayout());
@@ -64,7 +70,7 @@ public class GameUI implements Observer {
 	public void update(Observable o, Object arg) {
 		renderer.repaint();
 	}
-}
+
 class Renderer extends JPanel {
 	private Game game;
 	private int blockWidth = 10;
@@ -80,15 +86,18 @@ class Renderer extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		paintMap(g);
 		paintBlocks(g);
 	}
-	
+	private void paintMap(Graphics g) {
+		g.drawImage(image, 0, 0, null);
+	}
 	private void paintBlocks(Graphics g) {
-		ImageIcon imageIcon = new ImageIcon("src/player1.png");
-		Image player1 = imageIcon.getImage().getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+		//g.setColor(Color.black);
 		for (Square b : game.getSquares()) {
-			g.drawImage(player1, 100, 100, null);
+			g.drawImage(player1, b.getX(), b.getY(), null);
 		}
 	}
 	
+}
 }

@@ -149,10 +149,6 @@ public class Game extends Observable {
 	//// return false;
 	// }
 
-	public void stopAtSnakeHead() {
-
-	}
-
 	public void start() {
 		running = true;
 		gameThread.start();
