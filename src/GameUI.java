@@ -50,4 +50,5 @@ public class GameUI extends JFrame{
 		}, BorderLayout.SOUTH);
 		frame.setSize(500, 560);
 	}
+	
 }
