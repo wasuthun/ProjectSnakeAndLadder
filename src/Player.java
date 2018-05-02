@@ -7,7 +7,7 @@ public class Player {
 	private boolean freezeBool=true;
 	public Player() {
 		this.state = new PlayerCanPlay(this);
-		position = new Square(9,0);
+		position = new Square(0,9);
 		freeze=new FreezeSquare(2,2);
 		backward=new BackwardSquare(9, 0);
 	}
