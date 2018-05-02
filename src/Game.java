@@ -27,6 +27,8 @@ public class Game extends Observable {
 
 	private Game() {
 		board = new Board();
+		snake=new ArrayList<>();
+		ladder=new ArrayList<>();
 		snake.add(new Snake(new Square(4, 3), new Square(4, 0)));
 		snake.add(new Snake(new Square(8, 4), new Square(6, 0)));
 		snake.add(new Snake(new Square(4, 5), new Square(8, 0)));

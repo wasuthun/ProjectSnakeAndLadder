@@ -13,20 +13,20 @@ public class Player {
 
 	public void move(int point) {
 		if(this.state.isTurn() == false) return;
-		//เดินทางซ้ายแบบไม่เปลี่ยนแถว
+		//เดินทางขวาแบบไม่เปลี่ยนแถว
 		if(position.getX()+point<10&&position.getY()%2==0) {
 			position.setX(position.getX()+point);
 		}
-		//ซ้ายเปลี่ยนแถว
+		//ขวาเปลี่ยนแถว
 		else if(position.getX()+point>9&&position.getY()%2==0&&position.getX()+point<20) {
 			position.setX(9-(position.getX()+point-10));
 			position.setY(position.getY()+1);
 		}
-		//ขวา
+		//ซ้าย
 		else if(position.getX()-point>=0&&position.getY()%2==1) {		
 			position.setX(position.getX()-point);
 		}
-		//ขวาเปลี่ยนแถว
+		//ซ้ายเปลี่ยนแถว
 		else if(position.getX()-point<0&&position.getY()%2==1&&-(position.getX()-point)-1<10) {
 			if(position.getY()==9&&position.getX()-point<=0) {
 				System.out.println("end!!");
@@ -37,7 +37,7 @@ public class Player {
 			position.setY(position.getY()+1);
 			}
 		}
-		//เดินซ้ายขึ้น2แถว 
+		//เดินขวาขึ้น2แถว 
 		else if(position.getX()+point>19&&position.getY()%2==0) {
 			if(position.getY()==8&&(position.getX()>7)&&point>10) {
 				System.out.println("end!!");
@@ -48,7 +48,7 @@ public class Player {
 			position.setY(position.getY()+2);
 			}
 		}
-		//ขวาขึ้น2แถว 
+		//ซ้ายขึ้น2แถว 
 		else if(-(position.getX()-point)-1>9&&position.getY()%2==1&&position.getX()-point<0) {
 			position.setX(8+position.getX());
 			position.setY(position.getY()+2);
