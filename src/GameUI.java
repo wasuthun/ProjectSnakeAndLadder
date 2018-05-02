@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,8 +21,7 @@ public class GameUI implements Observer {
 	private Renderer renderer = new Renderer();
 	private Image image;
 	private Image player1,player2,player3,player4;
-	private List<Image> players; 
-	private int amount = 0;
+	private List<Image> players = new ArrayList<Image>(); 
 
 	public GameUI(Game game) {
 		game.addObserver(this);
@@ -37,6 +37,10 @@ public class GameUI implements Observer {
 		player3 = imageIcon3.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imageIcon4 = new ImageIcon("src/player4.png");
 		player3 = imageIcon4.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		players.add(player1);
+		players.add(player2);
+		players.add(player3);
+		players.add(player4);
 		// JLabel label = new JLabel(new ImageIcon(image));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// frame.getContentPane().add(label);
@@ -98,10 +102,12 @@ public class GameUI implements Observer {
 		}
 
 		private void paintBlocks(Graphics g) {
-			// g.setColor(Color.black);
+			int picker = 0;
 			for (Square b : game.getSquares()) {
-				g.drawImage(player1, b.getX()*blockWidth, b.getY()*blockWidth, null);
-				g.drawImage(player2, b.getX()*blockWidth, b.getY()*blockWidth, null);
+				if (picker >= 4)
+					picker = 0;
+				g.drawImage(players.get(picker), b.getX()*blockWidth, b.getY()*blockWidth, null);
+				picker++;
 			}
 		}
 
