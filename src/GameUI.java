@@ -18,7 +18,7 @@ public class GameUI extends JFrame{
 
 	public GameUI(Game game) {
 		frame = new JFrame("Snake and ladder");
-		ImageIcon imageIcon = new ImageIcon("/Users/mark/Documents/OOP/ProjectSnakeAndLadder/src/8153987.jpg");
+		ImageIcon imageIcon = new ImageIcon("src/8153987.jpg");
 		image = imageIcon.getImage().getScaledInstance(500, 501, java.awt.Image.SCALE_SMOOTH);
 		JLabel label = new JLabel(new ImageIcon(image));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
