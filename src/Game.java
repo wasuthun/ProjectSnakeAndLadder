@@ -175,7 +175,7 @@ public class Game extends Observable {
 	public void restart() {
 		turn = 1;
 		for (Player player : players) {
-			player.setPosition(new Square(0, 0));
+			player.setPosition(new Square(0, 9));
 		}
 		running = true;
 		if (!gameThread.isAlive()) {

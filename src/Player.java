@@ -3,11 +3,13 @@ public class Player {
 	private PlayerState state;
 	private Square position;
 	private FreezeSquare freeze;
+	private BackwardSquare backward;
 	private boolean freezeBool=true;
 	public Player() {
 		this.state = new PlayerCanPlay(this);
-		position = new Square(0,9);
+		position = new Square(9,0);
 		freeze=new FreezeSquare(2,2);
+		backward=new BackwardSquare(9, 0);
 	}
 
 	public void setState(PlayerState state) {
@@ -64,6 +66,10 @@ public class Player {
 				return;
 			}
 			freezeBool=true;
+		}
+		if(backward.getX()==position.getX()&&backward.getY()==position.getY()) {
+			moveBackWord(point);
+			return;
 		}
 		//ขวา
 		if(position.getX()+point<10&&position.getY()%2==1) {
