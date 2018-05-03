@@ -60,8 +60,6 @@ public class PlayerUIController {
 		// System.out.println(player.getPosition().getX());
 		// System.out.println(player.getPosition().getY());
 		player.move(point);
-		System.out.println(player.getPosition().getX());
-		System.out.println(player.getPosition().getY());
 		replay.add(point);
 		game.switchTurn();
 	}

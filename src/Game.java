@@ -9,7 +9,7 @@ public class Game extends Observable {
 	private Board board;
 	private Dice dice = new Dice();
 	private PlayerUIController controller = new PlayerUIController();
-	private int turn = 0;
+	private int turn = 1;
 	private boolean running = true;
 	private List<Ladder> ladder = new ArrayList<Ladder>();
 	private List<Snake> snake = new ArrayList<Snake>();
@@ -63,7 +63,6 @@ public class Game extends Observable {
 			for (Player player : players) {
 				if (player.getPosition().getX() == snake.getHead().getX()
 						&& player.getPosition().getY() == snake.getHead().getY()) {
-					System.out.println("snake!!");
 					player.setPosition(new Square(snake.getTail().getX(), snake.getTail().getY()));
 				}
 			}
@@ -72,7 +71,6 @@ public class Game extends Observable {
 				for (Player player : players) {
 					if (player.getPosition().getX() == ladder.getBottom().getX()
 							&& player.getPosition().getY() == ladder.getBottom().getY()) {
-						System.out.println("ladder!!");
 						player.setPosition(new Square(ladder.getTop().getX(), ladder.getTop().getY()));
 					}
 				}
@@ -82,7 +80,6 @@ public class Game extends Observable {
 				if ((player.getPosition().getY() < 0)
 						|| (player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
 					this.end();
-					System.out.println("end");
 				}
 			}
 			updateBoard();
@@ -109,7 +106,7 @@ public class Game extends Observable {
 			players.add(player);
 			currentPlayer = players.get(0);
 			return true;
-		} else if (players.size() < 4) {
+		} else if (players.size() < 4&&players.size()>0) {
 			players.add(player);
 			return true;
 		}
@@ -149,15 +146,7 @@ public class Game extends Observable {
 
 	public void switchTurn() {
 		for (int i = 0; i < players.size(); i++) {
-			// if (turn % players.size() == 1) {
-			// players.get(i).setState(new PlayerCanNotPlay(players.get(i)));
-			// } else {
-			// currentPlayer = players.get(i);
-			// System.out.println("switch");
-			// players.get(i).setState(new PlayerCanPlay(players.get(i)));
-			// }
 			if (turn % players.size() == i) {
-				System.out.println("player " + (i + 1));
 				currentPlayer = players.get(i);
 				players.get(i).setState(new PlayerCanPlay(players.get(i)));
 			} else {
@@ -165,7 +154,6 @@ public class Game extends Observable {
 				players.get(i).setState(new PlayerCanNotPlay(players.get(i)));
 			}
 		}
-		System.out.println("turn" + turn);
 		turn++;
 	}
 
@@ -175,7 +163,8 @@ public class Game extends Observable {
 
 	public void restart() {
 		currentPlayer = players.get(0);
-		turn = 0;
+		currentPlayer.setState(new PlayerCanPlay(currentPlayer));
+		turn = 1;
 		for (Player player : players) {
 			player.setPosition(new Square(0, 9));
 		}
