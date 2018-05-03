@@ -37,8 +37,8 @@ public class Game extends Observable {
 		ladder.add(new Ladder(new Square(2, 1), new Square(1, 3)));
 		ladder.add(new Ladder(new Square(5, 1), new Square(7, 5)));
 		ladder.add(new Ladder(new Square(1, 5), new Square(2, 7)));
-		ladder.add(new Ladder(new Square(5, 3), new Square(4, 0)));
-		ladder.add(new Ladder(new Square(9, 5), new Square(8, 0)));
+		ladder.add(new Ladder(new Square(5, 6), new Square(4, 9)));
+		ladder.add(new Ladder(new Square(9, 4), new Square(8, 9)));
 		updateBoard();
 	}
 
@@ -66,7 +66,7 @@ public class Game extends Observable {
 					player.setPosition(snake.getTail());
 				}
 			}
-			
+		}
 			for (Ladder ladder : ladder) {
 				for (Player player : players) {
 					if (player.getPosition().getX() == ladder.getBottom().getX()
@@ -84,9 +84,9 @@ public class Game extends Observable {
 					System.out.println("end");
 				}
 			}
+			updateBoard();
 		}
-		updateBoard();
-	}
+	
 
 	public void updateBoard() {
 		board.getSquares().clear();
