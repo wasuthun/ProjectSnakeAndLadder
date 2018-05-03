@@ -8,7 +8,7 @@ public class Game extends Observable {
 	private Player currentPlayer;
 	private Board board;
 	private Dice dice = new Dice();
-	private int turn = 0;
+	private int turn = 1;
 	private boolean running = true;
 	private List<Ladder> ladder = new ArrayList<Ladder>();
 	private List<Snake> snake = new ArrayList<Snake>();
@@ -108,7 +108,7 @@ public class Game extends Observable {
 			players.add(player);
 			currentPlayer = players.get(0);
 			return true;
-		} else if (players.size() < 4) {
+		} else if (players.size() < 4&&players.size()>0) {
 			players.add(player);
 			return true;
 		}
@@ -157,7 +157,9 @@ public class Game extends Observable {
 			// }
 			if (turn % players.size() == i) {
 				System.out.println("player " + (i + 1));
+				System.out.println(currentPlayer);
 				currentPlayer = players.get(i);
+				System.out.println(currentPlayer);
 				players.get(i).setState(new PlayerCanPlay(players.get(i)));
 			} else {
 				// System.out.println("switch");
@@ -174,7 +176,8 @@ public class Game extends Observable {
 
 	public void restart() {
 		currentPlayer = players.get(0);
-		turn = 0;
+		currentPlayer.setState(new PlayerCanPlay(currentPlayer));
+		turn = 1;
 		for (Player player : players) {
 			player.setPosition(new Square(0, 9));
 		}

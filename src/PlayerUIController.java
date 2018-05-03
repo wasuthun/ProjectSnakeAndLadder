@@ -37,6 +37,7 @@ public class PlayerUIController {
 	@FXML
 	public void handleRoll(ActionEvent event) {
 		player = game.getPlayer();
+		System.out.println("kuy :"+player.toString());
 		textField3.setText("player " + (game.getPlayerList().indexOf(player) + 1));
 		game.getDice().roll();
 		int firstDie = game.getDice().getFirstDie();
