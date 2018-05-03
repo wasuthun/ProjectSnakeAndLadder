@@ -61,6 +61,8 @@ public class PlayerUIController {
 		// System.out.println(player.getPosition().getY());
 		player.move(point);
 		replay.add(point);
+		game.replay = replay;
+		System.out.println(game.replay.toString());
 		game.switchTurn();
 	}
 
@@ -80,6 +82,7 @@ public class PlayerUIController {
 	}
 	
 	public List<Integer> getReplay() {
+		System.out.println(replay.size());
 		return replay;
 	}
 }

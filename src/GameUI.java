@@ -75,8 +75,12 @@ public class GameUI implements Observer {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						game.restart();
-						game.getReplay();
+						try {
+							game.getReplay();
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						renderer.requestFocus();
 					}
 				});

@@ -11,6 +11,7 @@ public class Game extends Observable {
 	private PlayerUIController controller = new PlayerUIController();
 	private int turn = 1;
 	private boolean running = true;
+	public List<Integer> replay = new ArrayList<Integer>();
 	private List<Ladder> ladder = new ArrayList<Ladder>();
 	private List<Snake> snake = new ArrayList<Snake>();
 	private Thread gameThread = new Thread() {
@@ -25,9 +26,9 @@ public class Game extends Observable {
 
 	private Game() {
 		board = new Board();
-		snake=new ArrayList<>();
-		ladder=new ArrayList<>();
-		snake.add(new Snake(new Square(5,0), new Square(2, 6)));
+		snake = new ArrayList<>();
+		ladder = new ArrayList<>();
+		snake.add(new Snake(new Square(5, 0), new Square(2, 6)));
 		snake.add(new Snake(new Square(1, 1), new Square(0, 8)));
 		snake.add(new Snake(new Square(6, 1), new Square(5, 3)));
 		snake.add(new Snake(new Square(4, 4), new Square(8, 9)));
@@ -67,24 +68,23 @@ public class Game extends Observable {
 				}
 			}
 		}
-			for (Ladder ladder : ladder) {
-				for (Player player : players) {
-					if (player.getPosition().getX() == ladder.getBottom().getX()
-							&& player.getPosition().getY() == ladder.getBottom().getY()) {
-						player.setPosition(new Square(ladder.getTop().getX(), ladder.getTop().getY()));
-					}
-				}
-			}
-
+		for (Ladder ladder : ladder) {
 			for (Player player : players) {
-				if ((player.getPosition().getY() < 0)
-						|| (player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
-					this.end();
+				if (player.getPosition().getX() == ladder.getBottom().getX()
+						&& player.getPosition().getY() == ladder.getBottom().getY()) {
+					player.setPosition(new Square(ladder.getTop().getX(), ladder.getTop().getY()));
 				}
 			}
-			updateBoard();
 		}
-	
+
+		for (Player player : players) {
+			if ((player.getPosition().getY() < 0)
+					|| (player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
+				this.end();
+			}
+		}
+		updateBoard();
+	}
 
 	public void updateBoard() {
 		board.getSquares().clear();
@@ -106,7 +106,7 @@ public class Game extends Observable {
 			players.add(player);
 			currentPlayer = players.get(0);
 			return true;
-		} else if (players.size() < 4&&players.size()>0) {
+		} else if (players.size() < 4 && players.size() > 0) {
 			players.add(player);
 			return true;
 		}
@@ -116,20 +116,6 @@ public class Game extends Observable {
 	public static Game getInstance() {
 		return game;
 	}
-
-	// public boolean isEnd() {
-	// // for (Player p : players) {
-	// // if (p.getPosition().getX() == 9 && p.getPosition().getY() == 9)
-	// // return true;
-	// // else if (p.getPosition().getY() > 9)
-	// // return true;
-	// // }
-	//// if (player1.getPosition().getX() == 9 && player1.getPosition().getY() == 9)
-	//// return true;
-	//// else if (player1.getPosition().getY() > 9)
-	//// return true;
-	//// return false;
-	// }
 
 	public void start() {
 		running = true;
@@ -182,12 +168,14 @@ public class Game extends Observable {
 		return players;
 	}
 
-	public void getReplay() {
-		for(Player player : players) {
-			for(int point : controller.getReplay() ) {
-				player.move(point);
-			}
+	public void getReplay() throws InterruptedException {
+		game.restart();
+		for (int point : replay) {
+			currentPlayer.move(point);
+			System.out.println(point);
+			game.switchTurn();
 		}
 		updateBoard();
+
 	}
 }
