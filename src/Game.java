@@ -179,4 +179,7 @@ public class Game extends Observable {
 		replay.clear();
 		updateBoard();
 	}
+	public List<Integer> getPointListReplay() {
+		return replay;
+	}
 }

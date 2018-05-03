@@ -59,7 +59,7 @@ public class GameUI implements Observer {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						game.restart();
-						
+						game.getPointListReplay().clear();
 						renderer.requestFocus();
 					}
 				});
