@@ -59,6 +59,7 @@ public class GameUI implements Observer {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						game.restart();
+						
 						renderer.requestFocus();
 					}
 				});

@@ -8,7 +8,6 @@ public class Game extends Observable {
 	private Player currentPlayer;
 	private Board board;
 	private Dice dice = new Dice();
-	private PlayerUIController controller = new PlayerUIController();
 	private int turn = 1;
 	private boolean running = true;
 	public List<Integer> replay = new ArrayList<Integer>();
@@ -174,6 +173,7 @@ public class Game extends Observable {
 		System.out.println(replay.toString());
 		for (int point : replay) {
 			currentPlayer.move(point);
+			game.gamelogic();
 			game.switchTurn();
 		}
 		replay.clear();
