@@ -17,6 +17,7 @@ public class GameUI implements Observer {
 
 	private JButton restartGame;
 	private JButton addPlayer;
+	private JButton replay;
 	private JFrame frame;
 	private Renderer renderer = new Renderer();
 	private Image image;
@@ -52,6 +53,7 @@ public class GameUI implements Observer {
 			{
 				restartGame = new JButton("restart");
 				addPlayer = new JButton("Add Player");
+				replay = new JButton("Replay");
 				restartGame.addActionListener(new ActionListener() {
 
 					@Override
@@ -68,8 +70,20 @@ public class GameUI implements Observer {
 						renderer.requestFocus();
 					}
 				});
+				
+				replay.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						for(Player p : game.getPlayerList()) {
+							p.getReplay();
+							renderer.requestFocus();
+						}
+					}
+				});
 				add(restartGame);
 				add(addPlayer);
+				add(replay);
 			}
 		}, BorderLayout.SOUTH);
 		frame.setSize(750, 810);

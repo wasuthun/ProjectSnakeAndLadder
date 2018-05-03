@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 	private PlayerState state;
@@ -5,9 +7,10 @@ public class Player {
 	private FreezeSquare freeze;
 	private BackwardSquare backward;
 	private boolean freezeBool=true;
+	private List<Square> replay = new ArrayList<Square>();
 	public Player() {
 		this.state = new PlayerCanPlay(this);
-		position = new Square(9,0);
+		position = new Square(0,9);
 		freeze=new FreezeSquare(2,2);
 		backward=new BackwardSquare(9, 0);
 	}
@@ -57,6 +60,7 @@ public class Player {
 			position.setX(8+position.getX());
 			position.setY(position.getY()+2);
 		}
+		replay.add(position);
 	}
 	public void move(int point) {
 		if(this.state.isTurn() == false) return;
@@ -111,6 +115,7 @@ public class Player {
 			position.setX(8+position.getX());
 			position.setY(position.getY()-2);
 		}
+		replay.add(position);
 	}
 	public void setPosition(Square square) {
 		this.position = square;
@@ -120,4 +125,7 @@ public class Player {
 		return position;
 	}
 
+	public List<Square> getReplay(){
+		return replay;
+	}
 }
