@@ -123,7 +123,7 @@ public class GameUI implements Observer {
 			for (Square b : game.getSquares()) {
 				if (picker >= 4)
 					picker = 0;
-				g.drawImage(players.get(picker), b.getX()*blockWidth, b.getY()*blockWidth, null);
+				g.drawImage(players.get(picker), b.getX()*blockWidth, b.getY()*blockWidth, this);
 				picker++;
 			}
 		}

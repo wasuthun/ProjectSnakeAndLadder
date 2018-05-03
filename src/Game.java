@@ -12,6 +12,7 @@ public class Game extends Observable {
 	private int turn = 1;
 	private boolean running = true;
 	public List<Integer> replay = new ArrayList<Integer>();
+	public List<Integer> replaytmp = new ArrayList<Integer>();
 	private List<Ladder> ladder = new ArrayList<Ladder>();
 	private List<Snake> snake = new ArrayList<Snake>();
 	private Thread gameThread = new Thread() {
@@ -170,12 +171,12 @@ public class Game extends Observable {
 
 	public void getReplay() throws InterruptedException {
 		game.restart();
+		System.out.println(replay.toString());
 		for (int point : replay) {
 			currentPlayer.move(point);
-			System.out.println(point);
 			game.switchTurn();
 		}
+		replay.clear();
 		updateBoard();
-
 	}
 }

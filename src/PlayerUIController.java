@@ -52,35 +52,36 @@ public class PlayerUIController {
 		// player.move(7);
 		textField1.setText("" + firstDie);
 		textField2.setText("" + secondDie);
-		setFace(face1,firstDie);
-		setFace(face2,secondDie);
+		setFace(face1, firstDie);
+		setFace(face2, secondDie);
 		// System.out.println(player.getPosition().getX());
 		// System.out.println(player.getPosition().getY());
 		// player.move(12);
 		// System.out.println(player.getPosition().getX());
 		// System.out.println(player.getPosition().getY());
 		player.move(point);
-		replay.add(point);
+		if (game.isOver() == false)
+			replay.add(point);
 		game.replay = replay;
 		System.out.println(game.replay.toString());
 		game.switchTurn();
 	}
 
-	private void setFace(ImageView face,int point) {
+	private void setFace(ImageView face, int point) {
 		if (point == 1)
 			face.setImage(new Image("Image/1.png"));
-		else if(point == 2)
+		else if (point == 2)
 			face.setImage(new Image("Image/2.png"));
-		else if(point == 3)
+		else if (point == 3)
 			face.setImage(new Image("Image/3.png"));
-		else if(point == 4)
+		else if (point == 4)
 			face.setImage(new Image("Image/4.png"));
-		else if(point == 5)
+		else if (point == 5)
 			face.setImage(new Image("Image/5.png"));
-		else if(point == 6)
+		else if (point == 6)
 			face.setImage(new Image("Image/6.png"));
 	}
-	
+
 	public List<Integer> getReplay() {
 		System.out.println(replay.size());
 		return replay;
