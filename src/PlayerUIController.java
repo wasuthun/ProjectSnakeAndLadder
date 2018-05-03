@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,6 +31,7 @@ public class PlayerUIController {
 	private ImageView face2;
 	private Game game = Game.getInstance();
 	private Player player;
+	private List<Integer> replay = new ArrayList<Integer>();
 
 	@FXML
 	public void initialize() {
@@ -58,6 +62,7 @@ public class PlayerUIController {
 		player.move(point);
 		System.out.println(player.getPosition().getX());
 		System.out.println(player.getPosition().getY());
+		replay.add(point);
 		game.switchTurn();
 	}
 
@@ -74,5 +79,9 @@ public class PlayerUIController {
 			face.setImage(new Image("Image/5.png"));
 		else if(point == 6)
 			face.setImage(new Image("Image/6.png"));
+	}
+	
+	public List<Integer> getReplay() {
+		return replay;
 	}
 }

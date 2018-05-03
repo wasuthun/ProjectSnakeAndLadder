@@ -75,11 +75,9 @@ public class GameUI implements Observer {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						for(Player p : game.getPlayerList()) {
-							for(Square s : p.getReplay()) {
-								
-							}
-						}
+						game.restart();
+						game.getReplay();
+						renderer.requestFocus();
 					}
 				});
 				add(restartGame);

@@ -8,6 +8,7 @@ public class Game extends Observable {
 	private Player currentPlayer;
 	private Board board;
 	private Dice dice = new Dice();
+	private PlayerUIController controller = new PlayerUIController();
 	private int turn = 0;
 	private boolean running = true;
 	private List<Ladder> ladder = new ArrayList<Ladder>();
@@ -192,4 +193,12 @@ public class Game extends Observable {
 		return players;
 	}
 
+	public void getReplay() {
+		for(Player player : players) {
+			for(int point : controller.getReplay() ) {
+				player.move(point);
+			}
+		}
+		updateBoard();
+	}
 }
