@@ -37,7 +37,7 @@ public class GameUI implements Observer {
 		ImageIcon imageIcon3 = new ImageIcon("src/player3.png");
 		player3 = imageIcon3.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imageIcon4 = new ImageIcon("src/player4.png");
-		player3 = imageIcon4.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		player4 = imageIcon4.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		players.add(player1);
 		players.add(player2);
 		players.add(player3);
@@ -76,8 +76,9 @@ public class GameUI implements Observer {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						for(Player p : game.getPlayerList()) {
-							p.getReplay();
-							renderer.requestFocus();
+							for(Square s : p.getReplay()) {
+								
+							}
 						}
 					}
 				});

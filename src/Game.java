@@ -8,7 +8,7 @@ public class Game extends Observable {
 	private Player currentPlayer;
 	private Board board;
 	private Dice dice = new Dice();
-	private int turn = 1;
+	private int turn = 0;
 	private boolean running = true;
 	private List<Ladder> ladder = new ArrayList<Ladder>();
 	private List<Snake> snake = new ArrayList<Snake>();
@@ -63,7 +63,7 @@ public class Game extends Observable {
 				if (player.getPosition().getX() == snake.getHead().getX()
 						&& player.getPosition().getY() == snake.getHead().getY()) {
 					System.out.println("snake!!");
-					player.setPosition(snake.getTail());
+					player.setPosition(new Square(snake.getTail().getX(), snake.getTail().getY()));
 				}
 			}
 		}
@@ -72,7 +72,7 @@ public class Game extends Observable {
 					if (player.getPosition().getX() == ladder.getBottom().getX()
 							&& player.getPosition().getY() == ladder.getBottom().getY()) {
 						System.out.println("ladder!!");
-						player.setPosition(ladder.getTop());
+						player.setPosition(new Square(ladder.getTop().getX(), ladder.getTop().getY()));
 					}
 				}
 			}
@@ -173,7 +173,8 @@ public class Game extends Observable {
 	}
 
 	public void restart() {
-		turn = 1;
+		currentPlayer = players.get(0);
+		turn = 0;
 		for (Player player : players) {
 			player.setPosition(new Square(0, 9));
 		}
