@@ -209,7 +209,6 @@ public class GameUI implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-//
 //		if (game.getPlayer() == null) {
 			renderer.repaint();
 //		} else {
