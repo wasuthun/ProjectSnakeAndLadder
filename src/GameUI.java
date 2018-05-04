@@ -19,12 +19,13 @@ import javax.swing.Timer;
 
 public class GameUI implements Observer {
 	private JFrame frame;
-	private String[] item = { "Add player", "Restart", "Replay" };
+	private String[] item = { "Add player","Save","Load", "Restart", "Replay" };
 	private Renderer renderer = new Renderer();
 	private Image image;
 	private Image player1, player2, player3, player4;
 	private List<Image> players = new ArrayList<Image>();
 	private Game game;
+	private Game.Memento m;
 
 	public GameUI(Game game) {
 		game.addObserver(this);
@@ -90,6 +91,24 @@ public class GameUI implements Observer {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						game.addPlayer(new Player());
+						renderer.requestFocus();
+					}
+				});
+			} else if (x.equals("Save")) {
+				mitem.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						m = game.save();
+						renderer.requestFocus();
+					}
+				});
+			} else if(x.equals("Load")) {
+				mitem.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						game.load(m);
 						renderer.requestFocus();
 					}
 				});
@@ -190,12 +209,12 @@ public class GameUI implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-
-		if (game.getPlayer() == null) {
+//
+//		if (game.getPlayer() == null) {
 			renderer.repaint();
-		} else {
-			moveAnimation(game.getPlayer());
-		}
+//		} else {
+//			moveAnimation(game.getPlayer());
+//		}
 
 	}
 
@@ -224,7 +243,6 @@ public class GameUI implements Observer {
 			List<Square> squares = game.getSquares();
 			Square[] squaresArr = new Square[squares.size()];
 			squaresArr = squares.toArray(squaresArr);
-			System.out.println(squares);
 			for (Square b : squaresArr) {
 				if (picker >= 4)
 					picker = 0;

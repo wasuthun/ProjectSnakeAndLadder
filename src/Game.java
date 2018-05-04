@@ -186,4 +186,34 @@ public class Game extends Observable {
 		return replay;
 	}
 
+	public Memento save() {
+		System.out.println(turn);
+		return new Memento(players, turn);
+	}
+	
+	public void load(Memento m) {
+		players.clear();
+		for (Player p : m.player) {
+			Player p1 = new Player();
+			p1.setPosition(new Square(p.getPosition().getX(), p.getPosition().getY()));
+			this.players.add(p1);
+		}
+		this.turn = m.turn;
+		System.out.println(turn);
+	}
+
+	static class Memento {
+		private List<Player> player = new ArrayList<Player>();
+		private int turn;
+
+		public Memento(List<Player> player, int turn) {
+			for (Player p : player) {
+				Player p1 = new Player();
+				p1.setPosition(new Square(p.getPosition().getX(), p.getPosition().getY()));
+				this.player.add(p1);
+			}
+			this.turn = turn;
+		}
+	}
+
 }
