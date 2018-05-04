@@ -198,14 +198,17 @@ public class Game extends Observable {
 			p1.setPosition(new Square(p.getPosition().getX(), p.getPosition().getY()));
 			this.players.add(p1);
 		}
-		this.turn = m.turn;
-		System.out.println(turn);
+		this.turn = m.turn-1;
+		this.currentPlayer=m.currentplayer;
+		currentPlayer.setState(new PlayerCanPlay(currentPlayer));
+		System.out.println(players.indexOf(currentPlayer)+" state");
 	}
 
 	static class Memento {
 		private List<Player> player = new ArrayList<Player>();
 		private int turn;
-
+		private Game game=Game.getInstance();
+		private Player currentplayer;
 		public Memento(List<Player> player, int turn) {
 			for (Player p : player) {
 				Player p1 = new Player();
@@ -213,6 +216,7 @@ public class Game extends Observable {
 				this.player.add(p1);
 			}
 			this.turn = turn;
+			currentplayer=game.getPlayer();
 		}
 	}
 
