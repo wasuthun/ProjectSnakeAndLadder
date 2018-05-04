@@ -24,10 +24,12 @@ public class GameUI implements Observer {
 	private Image image;
 	private Image player1,player2,player3,player4;
 	private List<Image> players = new ArrayList<Image>(); 
+	private Game game;
 
 	public GameUI(Game game) {
 		game.addObserver(this);
-
+		this.game = game;
+		
 		frame = new JFrame("Snake and ladder");
 		ImageIcon imageIcon = new ImageIcon("src/8153987.jpg");
 		image = imageIcon.getImage().getScaledInstance(750, 751, java.awt.Image.SCALE_SMOOTH);
@@ -186,7 +188,13 @@ public class GameUI implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		renderer.repaint();
+		
+		if (game.getPlayer() == null) {
+			renderer.repaint();
+		} else {
+			moveAnimation(game.getPlayer());
+		}
+		
 	}
 
 	class Renderer extends JPanel {
@@ -211,7 +219,11 @@ public class GameUI implements Observer {
 
 		private void paintBlocks(Graphics g) {
 			int picker = 0;
-			for (Square b : game.getSquares()) {
+			List<Square> squares = game.getSquares();
+			Square[] squaresArr = new Square[squares.size()];
+			squaresArr = squares.toArray(squaresArr);
+			System.out.println(squares);
+			for (Square b : squaresArr) {
 				if (picker >= 4)
 					picker = 0;
 				g.drawImage(players.get(picker), b.getX()*blockWidth, b.getY()*blockWidth, this);
