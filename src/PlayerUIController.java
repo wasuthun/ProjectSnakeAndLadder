@@ -82,8 +82,4 @@ public class PlayerUIController {
 			face.setImage(new Image("Image/6.png"));
 	}
 
-	public List<Integer> getReplay() {
-		System.out.println(replay.size());
-		return replay;
-	}
 }

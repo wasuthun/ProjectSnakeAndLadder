@@ -14,15 +14,7 @@ public class Game extends Observable {
 	public List<Integer> replaytmp = new ArrayList<Integer>();
 	private List<Ladder> ladder = new ArrayList<Ladder>();
 	private List<Snake> snake = new ArrayList<Snake>();
-	private Thread gameThread = new Thread() {
-		@Override
-		public void run() {
-			super.run();
-			while (running) {
-				oneGameLoop();
-			}
-		}
-	};
+	private Thread gameThread=new Thread(){@Override public void run(){super.run();while(running){oneGameLoop();}}};
 
 	private Game() {
 		board = new Board();
@@ -179,7 +171,9 @@ public class Game extends Observable {
 		replay.clear();
 		updateBoard();
 	}
+
 	public List<Integer> getPointListReplay() {
 		return replay;
 	}
+
 }
