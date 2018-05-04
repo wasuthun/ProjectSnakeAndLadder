@@ -4,6 +4,7 @@ import java.util.List;
 public class Player {
 	private PlayerState state;
 	private Square position;
+	private Square oldPosition;
 	private FreezeSquare freeze;
 	private BackwardSquare backward;
 	private boolean freezeBool=true;
@@ -61,6 +62,7 @@ public class Player {
 		replay.add(position);
 	}
 	public void move(int point) {
+		oldPosition=new Square(this.position.getX(), this.position.getY());
 		if(this.state.isTurn() == false) return;
 		if(freeze.getX()==position.getX()&&freeze.getY()==position.getY()) {
 			if(freezeBool) {
@@ -122,7 +124,9 @@ public class Player {
 	public Square getPosition() {
 		return position;
 	}
-
+	public Square getOldPosition() {
+		return oldPosition;
+	}
 	public List<Square> getReplay(){
 		return replay;
 	}

@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class GameUI implements Observer {
 
@@ -92,6 +93,95 @@ public class GameUI implements Observer {
 		}, BorderLayout.SOUTH);
 		frame.setSize(750, 810);
 		renderer.requestFocus();
+	}
+	
+	private void moveAnimation(Player player) {
+		// piece go back when go more than Board size
+		
+		Timer timer = new Timer(10, null);
+		timer.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Square oldPos=new Square(player.getOldPosition().getX(), player.getOldPosition().getY());
+				Square newPos=new Square(player.getPosition().getX(), player.getPosition().getY());
+				//แถวเดียว
+				if(oldPos.getY()==newPos.getY()) {
+					if(oldPos.getX()<newPos.getX())
+					for (int i = oldPos.getX(); i <=newPos.getX(); i++) {
+						oldPos.setX(i);
+						renderer.repaint();
+					}
+					else if(oldPos.getX()>newPos.getX()) 
+						for (int i = oldPos.getX(); i >=newPos.getX(); i--) {
+							oldPos.setX(i);
+							renderer.repaint();
+						}
+				}
+				//เดินขึ้น1แถว
+				else if(oldPos.getY()-1==newPos.getY()) {
+					if(oldPos.getY()%2==1) {
+						for (int i = oldPos.getX(); i <= 9; i++) {
+							oldPos.setX(i);
+							renderer.repaint();
+							}
+						oldPos.setY(oldPos.getY()-1);
+						for (int j = 9; j >=newPos.getX(); j--) {
+							oldPos.setX(j);
+							renderer.repaint();
+							}
+					}
+					else {
+						for (int i = oldPos.getX(); i>= 0; i--) {
+							oldPos.setX(i);
+							renderer.repaint();
+							}
+						oldPos.setY(oldPos.getY()-1);
+						for (int j = 0; j <=newPos.getX(); j++) {
+							oldPos.setX(j);
+							renderer.repaint();
+							}
+					}
+				}
+				//ขึ้น2แถว
+				else if(oldPos.getY()-2==newPos.getY()) {
+					if(oldPos.getY()%2==1) {
+						for (int i = oldPos.getX(); i <= 9; i++) {
+							oldPos.setX(i);
+							renderer.repaint();
+							}
+						oldPos.setY(oldPos.getY()-1);
+						for (int j = 9; j >=0; j--) {
+							oldPos.setX(j);
+							renderer.repaint();
+							}
+						oldPos.setY(oldPos.getY()-1);
+						for (int k = 0; k <=newPos.getX(); k++) {
+							oldPos.setX(k);
+							renderer.repaint();
+							}
+						
+					}
+					else {
+						for (int i = oldPos.getX(); i >= 0; i--) {
+							oldPos.setX(i);
+							renderer.repaint();
+							}
+						oldPos.setY(oldPos.getY()-1);
+						for (int j = 0; j <=9; j++) {
+							oldPos.setX(j);
+							renderer.repaint();
+							}
+						oldPos.setY(oldPos.getY()-1);
+						for (int k = 9; k >=newPos.getX(); k--) {
+							oldPos.setX(k);
+							renderer.repaint();
+							}
+					}
+				}
+			}
+		});
+		timer.start();
 	}
 
 	@Override
