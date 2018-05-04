@@ -65,11 +65,14 @@ public class PlayerUIController {
 		player.move(point);
 		}
 		catch (NullPointerException e) {
-			//Alert
+			textField1.setText("");
+			textField2.setText("");
+			textField3.setText("");
+			face1.setImage(null);
+			face2.setImage(null);
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Warning Dialog");
 			alert.setHeaderText("Please add player");
-
 			alert.showAndWait();
 		}
 		if (game.isOver() == false)
