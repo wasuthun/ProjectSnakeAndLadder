@@ -147,8 +147,18 @@ public class Game extends Observable {
 			player.setPosition(new Square(0, 9));
 		}
 		running = true;
+		System.out.println(gameThread.isAlive());
 		if (!gameThread.isAlive()) {
-			new Thread(gameThread).start();
+			gameThread = new Thread() {
+				@Override
+				public void run() {
+					super.run();
+					while (running) {
+						oneGameLoop();
+					}
+				}
+			};
+			gameThread.start();
 		}
 	}
 

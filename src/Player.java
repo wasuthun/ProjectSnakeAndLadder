@@ -11,6 +11,7 @@ public class Player {
 	private List<Square> replay = new ArrayList<Square>();
 	public Player() {
 		this.state = new PlayerCanPlay(this);
+		oldPosition = new Square(0, 9);
 		position = new Square(0,9);
 		freeze=new FreezeSquare(2,2);
 		backward=new BackwardSquare(9, 0);
