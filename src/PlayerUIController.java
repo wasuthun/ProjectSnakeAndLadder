@@ -3,6 +3,8 @@ import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -59,7 +61,17 @@ public class PlayerUIController {
 		// player.move(12);
 		// System.out.println(player.getPosition().getX());
 		// System.out.println(player.getPosition().getY());
+		try {
 		player.move(point);
+		}
+		catch (NullPointerException e) {
+			//Alert
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Warning Dialog");
+			alert.setHeaderText("Please add player");
+
+			alert.showAndWait();
+		}
 		if (game.isOver() == false)
 			replay.add(point);
 		game.replay = replay;
