@@ -40,13 +40,13 @@ public class GameUI implements Observer {
 		ImageIcon imageIcon = new ImageIcon("src/8153987.jpg");
 		image = imageIcon.getImage().getScaledInstance(750, 751, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imageIcon1 = new ImageIcon("src/player1.png");
-		player1 = imageIcon1.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		player1 = imageIcon1.getImage().getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imageIcon2 = new ImageIcon("src/player2.png");
-		player2 = imageIcon2.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		player2 = imageIcon2.getImage().getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imageIcon3 = new ImageIcon("src/player3.png");
 		player3 = imageIcon3.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon imageIcon4 = new ImageIcon("src/player4.png");
-		player4 = imageIcon4.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+		player4 = imageIcon4.getImage().getScaledInstance(60, 60, java.awt.Image.SCALE_SMOOTH);
 		players.add(player1);
 		players.add(player2);
 		players.add(player3);
