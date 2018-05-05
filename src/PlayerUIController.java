@@ -48,23 +48,18 @@ public class PlayerUIController {
 		int firstDie = game.getDice().getFirstDie();
 		int secondDie = game.getDice().getSecondDie();
 		int point = game.getDice().getPoint();
-		// player.move(12);
-		// System.out.println(player.getPosition().getX());
-		// System.out.println(player.getPosition().getY());
-		// player.move(7);
 		textField1.setText("" + firstDie);
 		textField2.setText("" + secondDie);
 		setFace(face1, firstDie);
 		setFace(face2, secondDie);
-		// System.out.println(player.getPosition().getX());
-		// System.out.println(player.getPosition().getY());
-		// player.move(12);
-		// System.out.println(player.getPosition().getX());
-		// System.out.println(player.getPosition().getY());
-		try {
-		player.move(point);
+		if ((player.getPosition().getY() < 0)
+				|| (player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
+			textField3.setText("Player " + (game.getPlayerList().indexOf(player) + 1)+ " win !!!");
 		}
-		catch (NullPointerException e) {
+
+		try {
+			player.move(point);
+		} catch (NullPointerException e) {
 			textField1.setText("");
 			textField2.setText("");
 			textField3.setText("");

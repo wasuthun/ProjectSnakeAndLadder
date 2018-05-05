@@ -27,47 +27,34 @@ public class Player {
 			return;
 		// เดินทางขวาแบบไม่เปลี่ยนแถว
 		if (position.getX() + point < 10 && position.getY() % 2 == 0) {
-			position.setX(position.getX() + point);
+			position = new Square(position.getX() + point, 0);
 		}
 		// ขวาเปลี่ยนแถว
 		else if (position.getX() + point > 9 && position.getY() % 2 == 0 && position.getX() + point < 20) {
-			// position.setX(9-(position.getX()+point-10));
-			// position.setY(position.getY()+1);
 			position = new Square(9 - (position.getX() + point - 10), position.getY() + 1);
 		}
 		// ซ้าย
 		else if (position.getX() - point >= 0 && position.getY() % 2 == 1) {
-			// position.setX(position.getX()-point);
 			position = new Square(position.getX() - point, position.getY());
 		}
 		// ซ้ายเปลี่ยนแถว
 		else if (position.getX() - point < 0 && position.getY() % 2 == 1 && -(position.getX() - point) - 1 < 10) {
 			if (position.getY() == 9 && position.getX() - point <= 0) {
-				// position.setX(0);
-				// position.setY(9);
 				position = new Square(0, 9);
 			} else {
-//				position.setX(-(position.getX() - point) - 1);
-//				position.setY(position.getY() + 1);
 				position = new Square(-(position.getX() - point) - 1, position.getY() + 1);
 			}
 		}
 		// เดินขวาขึ้น2แถว
 		else if (position.getX() + point > 19 && position.getY() % 2 == 0) {
 			if (position.getY() == 8 && (position.getX() > 7) && point > 10) {
-//				position.setX(0);
-//				position.setY(9);
 				position = new Square(0, 9);
 			} else {
-//				position.setX(point + position.getX() - 20);
-//				position.setY(position.getY() + 2);
 				position = new Square(point + position.getX() - 20, position.getY() + 2);
 			}
 		}
 		// ซ้ายขึ้น2แถว
 		else if (-(position.getX() - point) - 1 > 9 && position.getY() % 2 == 1 && position.getX() - point < 0) {
-//			position.setX(8 + position.getX());
-//			position.setY(position.getY() + 2);
 			position = new Square(8 + position.getX(), position.getY() + 2);
 		}
 		replay.add(position);
@@ -90,43 +77,37 @@ public class Player {
 		}
 		// ขวา
 		if (position.getX() + point < 10 && position.getY() % 2 == 1) {
-			position.setX(position.getX() + point);
+			position = new Square(position.getX()+point, position.getY());
 		}
 		// ขวาขึ้น1แถว
 		else if (position.getX() + point > 9 && position.getY() % 2 == 1 && position.getX() + point < 20) {
-			position.setX(9 - (position.getX() + point - 10));
-			position.setY(position.getY() - 1);
+			position = new Square(9 - (position.getX() + point - 10), position.getY() - 1);
 		}
 		// ซ้าย
 		else if (position.getX() - point >= 0 && position.getY() % 2 == 0) {
-			position.setX(position.getX() - point);
+			position = new Square(position.getX() - point, position.getY());
 		}
 		// ซ้าย1แถว
 		else if (position.getX() - point < 0 && position.getY() % 2 == 0 && -(position.getX() - point) - 1 < 10) {
 			if (position.getY() == 0 && position.getX() - point <= 0) {
 				System.out.println("end!!");
-				position.setX(0);
-				position.setY(0);
+				position = new Square(0, 0);
 			} else {
-				position.setX(-(position.getX() - point) - 1);
-				position.setY(position.getY() - 1);
+				position = new Square(-(position.getX() - point) - 1, position.getY() - 1);
 			}
 		}
 		// ขวาขึ้น2แถว
 		else if (position.getX() + point > 19 && position.getY() % 2 == 1) {
 			if (position.getY() == 1 && (position.getX() > 7) && point > 10) {
 				System.out.println("end!!");
-				position.setX(0);
-				position.setY(0);
+				position = new Square(0, 0);
 			} else {
-				position.setX(point + position.getX() - 20);
-				position.setY(position.getY() - 2);
+				position = new Square(point + position.getX() - 20, position.getY() - 2);
 			}
 		}
 		// ซ้าย2แถว
 		else if (-(position.getX() - point) - 1 > 9 && position.getY() % 2 == 0 && position.getX() - point < 0) {
-			position.setX(8 + position.getX());
-			position.setY(position.getY() - 2);
+			position = new Square(8 + position.getX(), position.getY() - 2);
 		}
 		replay.add(position);
 	}
