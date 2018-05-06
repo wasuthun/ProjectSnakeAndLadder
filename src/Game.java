@@ -170,7 +170,7 @@ public class Game extends Observable {
 		return players;
 	}
 
-	public void getReplay() throws InterruptedException {
+	public void getReplay() {
 		game.restart();
 		System.out.println(replay.toString());
 		for (int point : replay) {

@@ -55,7 +55,9 @@ public class PlayerUIController {
 		try {
 			if ((player.getPosition().getY() < 0)
 					|| (player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
-				textField3.setText("Player " + (game.getPlayerList().indexOf(player) + 1) + " win !!!");
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Your win!!");
+				alert.showAndWait();
 			}
 
 			player.move(point);
