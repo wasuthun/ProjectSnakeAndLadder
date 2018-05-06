@@ -121,94 +121,94 @@ public class GameUI implements Observer {
 		renderer.requestFocus();
 	}
 
-	private void moveAnimation(Player player) {
-		// piece go back when go more than Board size
-
-		Timer timer = new Timer(50, null);
-		timer.addActionListener(new ActionListener() {
-			private int blockWidth = 75;
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Square oldPos = new Square(player.getOldPosition().getX(), player.getOldPosition().getY());
-				Square newPos = new Square(player.getPosition().getX(), player.getPosition().getY());
-				// แถวเดียว
-				if (oldPos.getY() == newPos.getY()) {
-					if (oldPos.getX() < newPos.getX())
-						for (int i = oldPos.getX(); i <= newPos.getX(); i++) {
-							oldPos.setX(i);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-					else if (oldPos.getX() > newPos.getX())
-						for (int i = oldPos.getX(); i >= newPos.getX(); i--) {
-							oldPos.setX(i);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-				}
-				// เดินขึ้น1แถว
-				else if (oldPos.getY() - 1 == newPos.getY()) {
-					if (oldPos.getY() % 2 == 1) {
-						for (int i = oldPos.getX(); i <= 9; i++) {
-							oldPos.setX(i);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-						oldPos.setY(oldPos.getY() - 1);
-						for (int j = 9; j >= newPos.getX(); j--) {
-							oldPos.setX(j);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-					} else {
-						for (int i = oldPos.getX(); i >= 0; i--) {
-							oldPos.setX(i);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-						oldPos.setY(oldPos.getY() - 1);
-						for (int j = 0; j <= newPos.getX(); j++) {
-							oldPos.setX(j);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-					}
-				}
-				// ขึ้น2แถว
-				else if (oldPos.getY() - 2 == newPos.getY()) {
-					if (oldPos.getY() % 2 == 1) {
-						for (int i = oldPos.getX(); i <= 9; i++) {
-							oldPos.setX(i);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-						oldPos.setY(oldPos.getY() - 1);
-						for (int j = 9; j >= 0; j--) {
-							oldPos.setX(j);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-						oldPos.setY(oldPos.getY() - 1);
-						for (int k = 0; k <= newPos.getX(); k++) {
-							oldPos.setX(k);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-
-					} else {
-						for (int i = oldPos.getX(); i >= 0; i--) {
-							oldPos.setX(i);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-						oldPos.setY(oldPos.getY() - 1);
-						for (int j = 0; j <= 9; j++) {
-							oldPos.setX(j);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-						oldPos.setY(oldPos.getY() - 1);
-						for (int k = 9; k >= newPos.getX(); k--) {
-							oldPos.setX(k);
-							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
-						}
-					}
-				}
-				renderer.paintMap(renderer.getGraphics());
-				renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), newPos.getX()*blockWidth, newPos.getY()*blockWidth, renderer);
-			}
-		});
-		timer.start();
-	}
+//	private void moveAnimation(Player player) {
+//		// piece go back when go more than Board size
+//
+//		Timer timer = new Timer(50, null);
+//		timer.addActionListener(new ActionListener() {
+//			private int blockWidth = 75;
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				Square oldPos = new Square(player.getOldPosition().getX(), player.getOldPosition().getY());
+//				Square newPos = new Square(player.getPosition().getX(), player.getPosition().getY());
+//				// แถวเดียว
+//				if (oldPos.getY() == newPos.getY()) {
+//					if (oldPos.getX() < newPos.getX())
+//						for (int i = oldPos.getX(); i <= newPos.getX(); i++) {
+//							oldPos.setX(i);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//					else if (oldPos.getX() > newPos.getX())
+//						for (int i = oldPos.getX(); i >= newPos.getX(); i--) {
+//							oldPos.setX(i);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//				}
+//				// เดินขึ้น1แถว
+//				else if (oldPos.getY() - 1 == newPos.getY()) {
+//					if (oldPos.getY() % 2 == 1) {
+//						for (int i = oldPos.getX(); i <= 9; i++) {
+//							oldPos.setX(i);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//						oldPos.setY(oldPos.getY() - 1);
+//						for (int j = 9; j >= newPos.getX(); j--) {
+//							oldPos.setX(j);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//					} else {
+//						for (int i = oldPos.getX(); i >= 0; i--) {
+//							oldPos.setX(i);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//						oldPos.setY(oldPos.getY() - 1);
+//						for (int j = 0; j <= newPos.getX(); j++) {
+//							oldPos.setX(j);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//					}
+//				}
+//				// ขึ้น2แถว
+//				else if (oldPos.getY() - 2 == newPos.getY()) {
+//					if (oldPos.getY() % 2 == 1) {
+//						for (int i = oldPos.getX(); i <= 9; i++) {
+//							oldPos.setX(i);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//						oldPos.setY(oldPos.getY() - 1);
+//						for (int j = 9; j >= 0; j--) {
+//							oldPos.setX(j);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//						oldPos.setY(oldPos.getY() - 1);
+//						for (int k = 0; k <= newPos.getX(); k++) {
+//							oldPos.setX(k);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//
+//					} else {
+//						for (int i = oldPos.getX(); i >= 0; i--) {
+//							oldPos.setX(i);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//						oldPos.setY(oldPos.getY() - 1);
+//						for (int j = 0; j <= 9; j++) {
+//							oldPos.setX(j);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//						oldPos.setY(oldPos.getY() - 1);
+//						for (int k = 9; k >= newPos.getX(); k--) {
+//							oldPos.setX(k);
+//							renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), oldPos.getX()*blockWidth, oldPos.getY()*blockWidth, renderer);
+//						}
+//					}
+//				}
+//				renderer.paintMap(renderer.getGraphics());
+//				renderer.getGraphics().drawImage(players.get(game.getPlayerList().indexOf(player)), newPos.getX()*blockWidth, newPos.getY()*blockWidth, renderer);
+//			}
+//		});
+//		timer.start();
+//	}
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -248,8 +248,8 @@ public class GameUI implements Observer {
 			for (Square b : squaresArr) {
 				if (picker >= 4)
 					picker = 0;
-				moveAnimation(game.getPlayer());
-				//g.drawImage(players.get(picker), b.getX() * blockWidth, b.getY() * blockWidth, this);
+				//moveAnimation(game.getPlayer());
+				g.drawImage(players.get(picker), b.getX() * blockWidth, b.getY() * blockWidth, this);
 				picker++;
 			}
 		}

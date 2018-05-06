@@ -89,9 +89,15 @@ public class Player {
 		}
 		// ซ้าย1แถว
 		else if (position.getX() - point < 0 && position.getY() % 2 == 0 && -(position.getX() - point) - 1 < 10) {
-			if (position.getY() == 0 && position.getX() - point <= 0) {
+			if (position.getY() == 0&&position.getX() - point<=0) {
+				if(position.getX() - point==0) {
 				System.out.println("end!!");
 				position = new Square(0, 0);
+				}else{
+					int x=point-position.getX();
+					position.setX(1);
+					moveBackWord(x-1);
+				}
 			} else {
 				position = new Square(-(position.getX() - point) - 1, position.getY() - 1);
 			}
@@ -99,8 +105,15 @@ public class Player {
 		// ขวาขึ้น2แถว
 		else if (position.getX() + point > 19 && position.getY() % 2 == 1) {
 			if (position.getY() == 1 && (position.getX() > 7) && point > 10) {
+				if(point+position.getX()==19) {
 				System.out.println("end!!");
 				position = new Square(0, 0);
+				}else {
+					int x=point+position.getX()-19;
+					position.setX(1);
+					position.setY(0);
+					moveBackWord(x-1);
+				}
 			} else {
 				position = new Square(point + position.getX() - 20, position.getY() - 2);
 			}

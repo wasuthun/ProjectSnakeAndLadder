@@ -52,12 +52,12 @@ public class PlayerUIController {
 		textField2.setText("" + secondDie);
 		setFace(face1, firstDie);
 		setFace(face2, secondDie);
-		if ((player.getPosition().getY() < 0)
-				|| (player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
-			textField3.setText("Player " + (game.getPlayerList().indexOf(player) + 1)+ " win !!!");
-		}
-
 		try {
+			if ((player.getPosition().getY() < 0)
+					|| (player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
+				textField3.setText("Player " + (game.getPlayerList().indexOf(player) + 1) + " win !!!");
+			}
+
 			player.move(point);
 		} catch (NullPointerException e) {
 			textField1.setText("");
