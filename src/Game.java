@@ -192,16 +192,16 @@ public class Game extends Observable {
 	}
 	
 	public void load(Memento m) {
+		int index = players.indexOf(m.currentplayer);
 		players.clear();
 		for (Player p : m.player) {
 			Player p1 = new Player();
 			p1.setPosition(new Square(p.getPosition().getX(), p.getPosition().getY()));
 			this.players.add(p1);
 		}
+		this.currentPlayer = players.get(index);
 		this.turn = m.turn-1;
-		this.currentPlayer=m.currentplayer;
 		currentPlayer.setState(new PlayerCanPlay(currentPlayer));
-		System.out.println(players.indexOf(currentPlayer)+" state");
 	}
 
 	static class Memento {
