@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import javax.swing.JOptionPane;
+
 public class Game extends Observable {
 	private static Game game = new Game();
 	private List<Player> players = new ArrayList<Player>();
@@ -70,8 +72,7 @@ public class Game extends Observable {
 		}
 
 		for (Player player : players) {
-			if ((player.getPosition().getY() < 0)
-					|| (player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
+			if ((player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
 				this.end();
 			}
 		}
@@ -192,7 +193,8 @@ public class Game extends Observable {
 	}
 	
 	public void load(Memento m) {
-		int index = players.indexOf(m.currentplayer);
+		try {
+		int index = players.indexOf(m.currentPlayerM);
 		players.clear();
 		for (Player p : m.player) {
 			Player p1 = new Player();
@@ -200,15 +202,19 @@ public class Game extends Observable {
 			this.players.add(p1);
 		}
 		this.currentPlayer = players.get(index);
-		this.turn = m.turn-1;
+		m.currentPlayerM=this.currentPlayer;
+		this.turn = m.turn;
 		currentPlayer.setState(new PlayerCanPlay(currentPlayer));
+		}catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Please save first");
+		}
 	}
 
 	static class Memento {
 		private List<Player> player = new ArrayList<Player>();
 		private int turn;
 		private Game game=Game.getInstance();
-		private Player currentplayer;
+		private Player currentPlayerM;
 		public Memento(List<Player> player, int turn) {
 			for (Player p : player) {
 				Player p1 = new Player();
@@ -216,7 +222,7 @@ public class Game extends Observable {
 				this.player.add(p1);
 			}
 			this.turn = turn;
-			currentplayer=game.getPlayer();
+			currentPlayerM=game.getPlayer();
 		}
 	}
 
