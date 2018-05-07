@@ -1,3 +1,4 @@
+package game;
 
 public class FreezeSquare {
 	private int x;

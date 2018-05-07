@@ -1,8 +1,9 @@
+package game;
 
-public class Square {
+public class BackwardSquare {
 	private int x;
 	private int y;
-	public Square(int x,int y) {
+	public BackwardSquare(int x, int y) {
 		this.x=x;
 		this.y=y;
 	}
@@ -18,8 +19,5 @@ public class Square {
 	public void setY(int y) {
 		this.y = y;
 	}
-	@Override
-	public String toString() {
-		return x + " " + y;
-	}
+	
 }

@@ -1,3 +1,4 @@
+package player;
 
 public class PlayerCanPlay extends PlayerState {
 	private boolean turn = true;

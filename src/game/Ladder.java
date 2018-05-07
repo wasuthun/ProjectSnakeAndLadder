@@ -1,3 +1,4 @@
+package game;
 
 public class Ladder {
 	private Square top;

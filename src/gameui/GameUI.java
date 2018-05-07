@@ -1,3 +1,4 @@
+package gameui;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,6 +18,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import game.Game;
+import game.Square;
+import player.Player;
+
+
 
 public class GameUI implements Observer {
 	private JFrame frame;

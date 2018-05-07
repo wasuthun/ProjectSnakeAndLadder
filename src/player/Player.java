@@ -1,5 +1,10 @@
+package player;
 import java.util.ArrayList;
 import java.util.List;
+
+import game.BackwardSquare;
+import game.FreezeSquare;
+import game.Square;
 
 public class Player {
 	private PlayerState state;

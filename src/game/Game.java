@@ -1,8 +1,13 @@
+package game;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
 import javax.swing.JOptionPane;
+
+import player.Player;
+import player.PlayerCanNotPlay;
+import player.PlayerCanPlay;
 
 public class Game extends Observable {
 	private static Game game = new Game();
@@ -210,7 +215,7 @@ public class Game extends Observable {
 		}
 	}
 
-	static class Memento {
+	public static class Memento {
 		private List<Player> player = new ArrayList<Player>();
 		private int turn;
 		private Game game=Game.getInstance();
