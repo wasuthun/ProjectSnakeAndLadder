@@ -1,4 +1,5 @@
 package game;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -21,7 +22,17 @@ public class Game extends Observable {
 	public List<Integer> replaytmp = new ArrayList<Integer>();
 	private List<Ladder> ladder = new ArrayList<Ladder>();
 	private List<Snake> snake = new ArrayList<Snake>();
-	private Thread gameThread=new Thread(){@Override public void run(){super.run();while(running){oneGameLoop();}}};
+	private List<BackwardSquare> backlist = new ArrayList<BackwardSquare>();
+	private List<FreezeSquare> freezelist = new ArrayList<FreezeSquare>();
+	private Thread gameThread = new Thread() {
+		@Override
+		public void run() {
+			super.run();
+			while (running) {
+				oneGameLoop();
+			}
+		}
+	};
 
 	private Game() {
 		board = new Board();
@@ -40,6 +51,14 @@ public class Game extends Observable {
 		ladder.add(new Ladder(new Square(1, 5), new Square(2, 7)));
 		ladder.add(new Ladder(new Square(5, 6), new Square(4, 9)));
 		ladder.add(new Ladder(new Square(9, 4), new Square(8, 9)));
+
+		backlist.add(new BackwardSquare(3, 0));
+		backlist.add(new BackwardSquare(4, 2));
+		backlist.add(new BackwardSquare(2, 8));
+
+		freezelist.add(new FreezeSquare(7, 0));
+		freezelist.add(new FreezeSquare(2, 4));
+		freezelist.add(new FreezeSquare(6, 7));
 		updateBoard();
 	}
 
@@ -75,7 +94,22 @@ public class Game extends Observable {
 				}
 			}
 		}
-
+		for (FreezeSquare f : freezelist) {
+			for (Player player : players) {
+				if (f.getX() == player.getPosition().getX() && f.getY() == player.getPosition().getY()) {
+					if (player.getFreezeBool())
+						player.setFreezeBool(false);
+					else
+						player.setFreezeBool(true);
+				}
+			}
+		}
+		for (BackwardSquare b : backlist) {
+			for (Player player : players) {
+				if (b.getX() == player.getPosition().getX() && b.getY() == player.getPosition().getY())
+					player.moveBackWord(dice.getPoint());
+			}
+		}
 		for (Player player : players) {
 			if ((player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
 				this.end();
@@ -196,21 +230,21 @@ public class Game extends Observable {
 		System.out.println(turn);
 		return new Memento(players, turn);
 	}
-	
+
 	public void load(Memento m) {
 		try {
-		int index = players.indexOf(m.currentPlayerM);
-		players.clear();
-		for (Player p : m.player) {
-			Player p1 = new Player();
-			p1.setPosition(new Square(p.getPosition().getX(), p.getPosition().getY()));
-			this.players.add(p1);
-		}
-		this.currentPlayer = players.get(index);
-		m.currentPlayerM=this.currentPlayer;
-		this.turn = m.turn;
-		currentPlayer.setState(new PlayerCanPlay(currentPlayer));
-		}catch (NullPointerException e) {
+			int index = players.indexOf(m.currentPlayerM);
+			players.clear();
+			for (Player p : m.player) {
+				Player p1 = new Player();
+				p1.setPosition(new Square(p.getPosition().getX(), p.getPosition().getY()));
+				this.players.add(p1);
+			}
+			this.currentPlayer = players.get(index);
+			m.currentPlayerM = this.currentPlayer;
+			this.turn = m.turn;
+			currentPlayer.setState(new PlayerCanPlay(currentPlayer));
+		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "Please save first");
 		}
 	}
@@ -218,8 +252,9 @@ public class Game extends Observable {
 	public static class Memento {
 		private List<Player> player = new ArrayList<Player>();
 		private int turn;
-		private Game game=Game.getInstance();
+		private Game game = Game.getInstance();
 		private Player currentPlayerM;
+
 		public Memento(List<Player> player, int turn) {
 			for (Player p : player) {
 				Player p1 = new Player();
@@ -227,7 +262,7 @@ public class Game extends Observable {
 				this.player.add(p1);
 			}
 			this.turn = turn;
-			currentPlayerM=game.getPlayer();
+			currentPlayerM = game.getPlayer();
 		}
 	}
 

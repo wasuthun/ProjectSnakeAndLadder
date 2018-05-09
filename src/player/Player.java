@@ -1,4 +1,5 @@
 package player;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ public class Player {
 	private Square oldPosition;
 	private FreezeSquare freeze;
 	private BackwardSquare backward;
+	private BackwardSquare backward2;
+	private BackwardSquare backward3;
 	private boolean freezeBool = true;
 	private List<Square> replay = new ArrayList<Square>();
 
@@ -20,7 +23,9 @@ public class Player {
 		oldPosition = new Square(0, 9);
 		position = new Square(0, 9);
 		freeze = new FreezeSquare(2, 2);
-		backward = new BackwardSquare(9, 0);
+		backward = new BackwardSquare(3, 0);
+		backward2 = new BackwardSquare(4, 2);
+		backward3 = new BackwardSquare(2, 8);
 	}
 
 	public void setState(PlayerState state) {
@@ -69,20 +74,20 @@ public class Player {
 		oldPosition = new Square(this.position.getX(), this.position.getY());
 		if (this.state.isTurn() == false)
 			return;
-		if (freeze.getX() == position.getX() && freeze.getY() == position.getY()) {
-			if (freezeBool) {
-				freezeBool = false;
-				return;
-			}
-			freezeBool = true;
-		}
-		if (backward.getX() == position.getX() && backward.getY() == position.getY()) {
-			moveBackWord(point);
-			return;
-		}
+//		if (freeze.getX() == position.getX() && freeze.getY() == position.getY()) {
+//			if (freezeBool) {
+//				freezeBool = false;
+//				return;
+//			}
+//			freezeBool = true;
+//		}
+//		if (backward.getX() == position.getX() && backward.getY() == position.getY()) {
+//			moveBackWord(point);
+//			return;
+//		}
 		// ขวา
 		if (position.getX() + point < 10 && position.getY() % 2 == 1) {
-			position = new Square(position.getX()+point, position.getY());
+			position = new Square(position.getX() + point, position.getY());
 		}
 		// ขวาขึ้น1แถว
 		else if (position.getX() + point > 9 && position.getY() % 2 == 1 && position.getX() + point < 20) {
@@ -94,14 +99,14 @@ public class Player {
 		}
 		// ซ้าย1แถว
 		else if (position.getX() - point < 0 && position.getY() % 2 == 0 && -(position.getX() - point) - 1 < 10) {
-			if (position.getY() == 0&&position.getX() - point<=0) {
-				if(position.getX() - point==0) {
-				System.out.println("end!!");
-				position = new Square(0, 0);
-				}else{
-					int x=point-position.getX();
+			if (position.getY() == 0 && position.getX() - point <= 0) {
+				if (position.getX() - point == 0) {
+					System.out.println("end!!");
+					position = new Square(0, 0);
+				} else {
+					int x = point - position.getX();
 					position.setX(1);
-					moveBackWord(x-1);
+					moveBackWord(x - 1);
 				}
 			} else {
 				position = new Square(-(position.getX() - point) - 1, position.getY() - 1);
@@ -110,14 +115,14 @@ public class Player {
 		// ขวาขึ้น2แถว
 		else if (position.getX() + point > 19 && position.getY() % 2 == 1) {
 			if (position.getY() == 1 && (position.getX() > 7) && point > 10) {
-				if(point+position.getX()==19) {
-				System.out.println("end!!");
-				position = new Square(0, 0);
-				}else {
-					int x=point+position.getX()-19;
+				if (point + position.getX() == 19) {
+					System.out.println("end!!");
+					position = new Square(0, 0);
+				} else {
+					int x = point + position.getX() - 19;
 					position.setX(1);
 					position.setY(0);
-					moveBackWord(x-1);
+					moveBackWord(x - 1);
 				}
 			} else {
 				position = new Square(point + position.getX() - 20, position.getY() - 2);
@@ -144,5 +149,13 @@ public class Player {
 
 	public List<Square> getReplay() {
 		return replay;
+	}
+	
+	public void setFreezeBool(boolean freezeBool) {
+		this.freezeBool = freezeBool;
+	}
+	
+	public boolean getFreezeBool() {
+		return freezeBool;
 	}
 }

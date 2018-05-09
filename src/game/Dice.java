@@ -7,8 +7,9 @@ public class Dice {
 
 	public void roll() {
 		Random rand=new Random();
-		firstDie=rand.nextInt(6)+1;
-		secondDie=rand.nextInt(6)+1;
+//		firstDie=rand.nextInt(6)+1;
+//		secondDie=rand.nextInt(6)+1;
+		firstDie = 26;
 	}
 	public int getFirstDie() {
 		return firstDie;
