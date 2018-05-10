@@ -59,6 +59,7 @@ public class Game extends Observable {
 		freezelist.add(new FreezeSquare(7, 0));
 		freezelist.add(new FreezeSquare(2, 4));
 		freezelist.add(new FreezeSquare(6, 7));
+		freezelist.add(new FreezeSquare(3, 9));
 		updateBoard();
 	}
 
@@ -91,16 +92,6 @@ public class Game extends Observable {
 				if (player.getPosition().getX() == ladder.getBottom().getX()
 						&& player.getPosition().getY() == ladder.getBottom().getY()) {
 					player.setPosition(new Square(ladder.getTop().getX(), ladder.getTop().getY()));
-				}
-			}
-		}
-		for (FreezeSquare f : freezelist) {
-			for (Player player : players) {
-				if (f.getX() == player.getPosition().getX() && f.getY() == player.getPosition().getY()) {
-					if (player.getFreezeBool())
-						player.setFreezeBool(false);
-					else
-						player.setFreezeBool(true);
 				}
 			}
 		}
@@ -224,6 +215,10 @@ public class Game extends Observable {
 
 	public List<Integer> getPointListReplay() {
 		return replay;
+	}
+	
+	public List<FreezeSquare> getFreezelist() {
+		return freezelist;
 	}
 
 	public Memento save() {

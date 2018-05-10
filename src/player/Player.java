@@ -3,29 +3,22 @@ package player;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.BackwardSquare;
 import game.FreezeSquare;
+import game.Game;
 import game.Square;
 
 public class Player {
 	private PlayerState state;
 	private Square position;
 	private Square oldPosition;
-	private FreezeSquare freeze;
-	private BackwardSquare backward;
-	private BackwardSquare backward2;
-	private BackwardSquare backward3;
 	private boolean freezeBool = true;
+	private Game game = Game.getInstance();
 	private List<Square> replay = new ArrayList<Square>();
 
 	public Player() {
 		this.state = new PlayerCanPlay(this);
 		oldPosition = new Square(0, 9);
 		position = new Square(0, 9);
-		freeze = new FreezeSquare(2, 2);
-		backward = new BackwardSquare(3, 0);
-		backward2 = new BackwardSquare(4, 2);
-		backward3 = new BackwardSquare(2, 8);
 	}
 
 	public void setState(PlayerState state) {
@@ -74,17 +67,20 @@ public class Player {
 		oldPosition = new Square(this.position.getX(), this.position.getY());
 		if (this.state.isTurn() == false)
 			return;
-//		if (freeze.getX() == position.getX() && freeze.getY() == position.getY()) {
-//			if (freezeBool) {
-//				freezeBool = false;
-//				return;
-//			}
-//			freezeBool = true;
-//		}
-//		if (backward.getX() == position.getX() && backward.getY() == position.getY()) {
-//			moveBackWord(point);
-//			return;
-//		}
+		for (FreezeSquare freeze : game.getFreezelist()) {
+			if (freeze.getX() == position.getX() && freeze.getY() == position.getY()) {
+				if (freezeBool) {
+					freezeBool = false;
+					return;
+				}
+				freezeBool = true;
+			}
+		}
+		// if (backward.getX() == position.getX() && backward.getY() == position.getY())
+		// {
+		// moveBackWord(point);
+		// return;
+		// }
 		// ขวา
 		if (position.getX() + point < 10 && position.getY() % 2 == 1) {
 			position = new Square(position.getX() + point, position.getY());
@@ -150,11 +146,11 @@ public class Player {
 	public List<Square> getReplay() {
 		return replay;
 	}
-	
+
 	public void setFreezeBool(boolean freezeBool) {
 		this.freezeBool = freezeBool;
 	}
-	
+
 	public boolean getFreezeBool() {
 		return freezeBool;
 	}
