@@ -9,7 +9,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,8 +21,6 @@ public class PlayerUIController {
 	private Label point;
 	@FXML
 	private Label turn;
-	@FXML
-	private ProgressBar time;
 	@FXML
 	private TextField textField1;
 	@FXML
