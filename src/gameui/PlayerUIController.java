@@ -56,11 +56,18 @@ public class PlayerUIController {
 		setFace(face1, firstDie);
 		setFace(face2, secondDie);
 		try {
-			if ((player.getPosition().getY() < 0)
-					|| (player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
+			for(Player p:game.getPlayerList())
+			if ((p.getPosition().getX() == 0 && p.getPosition().getY() == 0)) {
+				textField1.setText("");
+				textField2.setText("");
+				textField3.setText("");
+				face1.setImage(null);
+				face2.setImage(null);
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setHeaderText("Your win!!");
+				alert.setTitle("Winner of this game");
+				alert.setHeaderText("Winner is player "+(game.getPlayerList().indexOf(p) + 1));
 				alert.showAndWait();
+				return;
 			}
 
 			player.move(point);
