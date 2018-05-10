@@ -207,6 +207,9 @@ public class Game extends Observable {
 			game.gamelogic();
 			game.switchTurn();
 		}
+		if(game.isOver()) {
+			JOptionPane.showMessageDialog(null, "Replay is End");
+		}
 		replay.clear();
 		updateBoard();
 	}
