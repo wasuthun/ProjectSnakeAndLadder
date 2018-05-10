@@ -95,12 +95,6 @@ public class Game extends Observable {
 				}
 			}
 		}
-		for (BackwardSquare b : backlist) {
-			for (Player player : players) {
-				if (b.getX() == player.getPosition().getX() && b.getY() == player.getPosition().getY())
-					player.moveBackWord(dice.getPoint());
-			}
-		}
 		for (Player player : players) {
 			if ((player.getPosition().getX() == 0 && player.getPosition().getY() == 0)) {
 				this.end();
@@ -199,6 +193,10 @@ public class Game extends Observable {
 
 	public List<Player> getPlayerList() {
 		return players;
+	}
+	
+	public List<BackwardSquare> getBacklist() {
+		return backlist;
 	}
 
 	public void getReplay() {

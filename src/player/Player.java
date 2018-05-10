@@ -3,6 +3,7 @@ package player;
 import java.util.ArrayList;
 import java.util.List;
 
+import game.BackwardSquare;
 import game.FreezeSquare;
 import game.Game;
 import game.Square;
@@ -76,11 +77,12 @@ public class Player {
 				freezeBool = true;
 			}
 		}
-		// if (backward.getX() == position.getX() && backward.getY() == position.getY())
-		// {
-		// moveBackWord(point);
-		// return;
-		// }
+		for (BackwardSquare backward : game.getBacklist()) {
+			if (backward.getX() == position.getX() && backward.getY() == position.getY()) {
+				moveBackWord(point);
+				return;
+			}
+		}
 		// ขวา
 		if (position.getX() + point < 10 && position.getY() % 2 == 1) {
 			position = new Square(position.getX() + point, position.getY());
