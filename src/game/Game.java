@@ -154,7 +154,6 @@ public class Game extends Observable {
 				currentPlayer = players.get(i);
 				players.get(i).setState(new PlayerCanPlay(players.get(i)));
 			} else {
-				// System.out.println("switch");
 				players.get(i).setState(new PlayerCanNotPlay(players.get(i)));
 			}
 		}
@@ -200,19 +199,19 @@ public class Game extends Observable {
 		return backlist;
 	}
 
-	public void getReplay() {
+	public void getReplay() throws InterruptedException {
 		game.restart();
-		System.out.println(replay.toString());
 		for (int point : replay) {
 			currentPlayer.move(point);
+			TimeUnit.SECONDS.sleep(2);
 			game.gamelogic();
 			game.switchTurn();
+			updateBoard();
 		}
 		if(game.isOver()) {
 			JOptionPane.showMessageDialog(null, "Replay is End");
 		}
 		replay.clear();
-		updateBoard();
 	}
 
 	public List<Integer> getPointListReplay() {

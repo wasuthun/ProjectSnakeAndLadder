@@ -85,7 +85,6 @@ public class PlayerUIController {
 		if (game.isOver() == false)
 			replay.add(point);
 		game.replay = replay;
-		System.out.println(game.replay.toString());
 		game.switchTurn();
 	}
 

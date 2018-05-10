@@ -21,8 +21,6 @@ import game.Game;
 import game.Square;
 import player.Player;
 
-
-
 public class GameUI implements Observer {
 	private JFrame frame;
 	private String[] item = { "Add player","Save","Load", "Restart", "Replay" };
@@ -30,12 +28,10 @@ public class GameUI implements Observer {
 	private Image image;
 	private Image player1, player2, player3, player4;
 	private List<Image> players = new ArrayList<Image>();
-	private Game game;
 	private Game.Memento m;
 
 	public GameUI(Game game) {
 		game.addObserver(this);
-		this.game = game;
 
 		frame = new JFrame("Snake and ladder");
 		JMenuBar bar = new JMenuBar();
@@ -56,9 +52,7 @@ public class GameUI implements Observer {
 		players.add(player2);
 		players.add(player3);
 		players.add(player4);
-		// JLabel label = new JLabel(new ImageIcon(image));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// frame.getContentPane().add(label);
 		frame.pack();
 		frame.setVisible(true);
 		frame.setLayout(new BorderLayout());
@@ -82,7 +76,11 @@ public class GameUI implements Observer {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						game.getReplay();
+						try {
+							game.getReplay();
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
 						renderer.requestFocus();
 					}
 				});
@@ -212,12 +210,7 @@ public class GameUI implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-//		if (game.getPlayer() == null) {
 			renderer.repaint();
-//		} else {
-//			moveAnimation(game.getPlayer());
-//		}
-
 	}
 
 	class Renderer extends JPanel {
@@ -248,7 +241,6 @@ public class GameUI implements Observer {
 			for (Square b : squaresArr) {
 				if (picker >= 4)
 					picker = 0;
-				//moveAnimation(game.getPlayer());
 				g.drawImage(players.get(picker), b.getX() * blockWidth, b.getY() * blockWidth, this);
 				picker++;
 			}
