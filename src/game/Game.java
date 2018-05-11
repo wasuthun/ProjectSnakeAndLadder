@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.TimeUnit;
@@ -34,7 +35,29 @@ public class Game extends Observable {
 			}
 		}
 	};
-
+	private Thread replayThread = new Thread() {
+		@Override
+		public void run() {
+			super.run();
+			game.restart();
+			for (int point : replay) {
+				currentPlayer.move(point);
+				try {
+					replayThread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				game.gamelogic();
+				game.switchTurn();
+				updateBoard();
+			}
+			if(replayThread.isAlive()) {
+				JOptionPane.showMessageDialog(null, "Replay is End");
+				replayThread.stop();
+				}
+			replay.clear();
+		}
+	};
 	private Game() {
 		board = new Board();
 		snake = new ArrayList<>();
@@ -203,18 +226,40 @@ public class Game extends Observable {
 	}
 
 	public void getReplay() throws InterruptedException {
-		game.restart();
-		for (int point : replay) {
-			currentPlayer.move(point);
-			TimeUnit.SECONDS.sleep(2);
-			game.gamelogic();
-			game.switchTurn();
-			updateBoard();
+		if(!replayThread.isAlive()) {
+		replayThread= new Thread() {
+			@Override
+			public void run() {
+				super.run();
+				game.restart();
+				Integer [] replayAarr=new Integer[replay.size()];
+				replay.toArray(replayAarr);
+				try {
+				for (int point : replay) {
+					currentPlayer.move(point);
+					try {
+						replayThread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					game.gamelogic();
+					game.switchTurn();
+					updateBoard();
+					
+				}
+				}catch (ConcurrentModificationException e) {
+					JOptionPane.showMessageDialog(null, "Dont press restart during replay");
+				}
+				if(replayThread.isAlive()) {
+					JOptionPane.showMessageDialog(null, "Replay is End");
+					replayThread.stop();
+					}
+				replay.clear();
+				}
+		};
 		}
-		if(game.isOver()) {
-			JOptionPane.showMessageDialog(null, "Replay is End");
-		}
-		replay.clear();
+		if(!replayThread.isAlive())
+		replayThread.start();
 	}
 
 	public List<Integer> getPointListReplay() {
