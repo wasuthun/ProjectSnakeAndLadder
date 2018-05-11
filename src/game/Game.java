@@ -165,6 +165,7 @@ public class Game extends Observable {
 	}
 
 	public void restart() {
+		try {
 		currentPlayer = players.get(0);
 		currentPlayer.setState(new PlayerCanPlay(currentPlayer));
 		turn = 1;
@@ -184,6 +185,8 @@ public class Game extends Observable {
 				}
 			};
 			gameThread.start();
+		}}catch (IndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "Please add player");
 		}
 	}
 
