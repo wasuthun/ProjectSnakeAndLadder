@@ -51,13 +51,14 @@ public class Game extends Observable {
 				game.switchTurn();
 				updateBoard();
 			}
-			if(replayThread.isAlive()) {
+			if (replayThread.isAlive()) {
 				JOptionPane.showMessageDialog(null, "Replay is End");
 				replayThread.stop();
-				}
+			}
 			replay.clear();
 		}
 	};
+
 	private Game() {
 		board = new Board();
 		snake = new ArrayList<>();
@@ -189,26 +190,27 @@ public class Game extends Observable {
 
 	public void restart() {
 		try {
-		currentPlayer = players.get(0);
-		currentPlayer.setState(new PlayerCanPlay(currentPlayer));
-		turn = 1;
-		for (Player player : players) {
-			player.setPosition(new Square(0, 9));
-		}
-		running = true;
-		System.out.println(gameThread.isAlive());
-		if (!gameThread.isAlive()) {
-			gameThread = new Thread() {
-				@Override
-				public void run() {
-					super.run();
-					while (running) {
-						oneGameLoop();
+			currentPlayer = players.get(0);
+			currentPlayer.setState(new PlayerCanPlay(currentPlayer));
+			turn = 1;
+			for (Player player : players) {
+				player.setPosition(new Square(0, 9));
+			}
+			running = true;
+			System.out.println(gameThread.isAlive());
+			if (!gameThread.isAlive()) {
+				gameThread = new Thread() {
+					@Override
+					public void run() {
+						super.run();
+						while (running) {
+							oneGameLoop();
+						}
 					}
-				}
-			};
-			gameThread.start();
-		}}catch (IndexOutOfBoundsException e) {
+				};
+				gameThread.start();
+			}
+		} catch (IndexOutOfBoundsException e) {
 			JOptionPane.showMessageDialog(null, "Please add player");
 		}
 	}
@@ -220,58 +222,57 @@ public class Game extends Observable {
 	public List<Player> getPlayerList() {
 		return players;
 	}
-	
+
 	public List<BackwardSquare> getBacklist() {
 		return backlist;
 	}
 
 	public void getReplay() throws InterruptedException {
-		if(!replayThread.isAlive()) {
-		replayThread= new Thread() {
-			@Override
-			public void run() {
-				super.run();
-				game.restart();
-				Integer [] replayAarr=new Integer[replay.size()];
-				replay.toArray(replayAarr);
-				try {
-				for (int point : replay) {
-					currentPlayer.move(point);
+		if (!replayThread.isAlive()) {
+			replayThread = new Thread() {
+				@Override
+				public void run() {
+					super.run();
+					game.restart();
+					Integer[] replayAarr = new Integer[replay.size()];
+					replay.toArray(replayAarr);
 					try {
-						replayThread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+						for (int point : replay) {
+							currentPlayer.move(point);
+							try {
+								replayThread.sleep(1000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							game.gamelogic();
+							game.switchTurn();
+							updateBoard();
+
+						}
+					} catch (ConcurrentModificationException e) {
+						JOptionPane.showMessageDialog(null, "Dont press restart during replay");
 					}
-					game.gamelogic();
-					game.switchTurn();
-					updateBoard();
-					
-				}
-				}catch (ConcurrentModificationException e) {
-					JOptionPane.showMessageDialog(null, "Dont press restart during replay");
-				}
-				if(replayThread.isAlive()) {
-					JOptionPane.showMessageDialog(null, "Replay is End");
-					replayThread.stop();
+					if (replayThread.isAlive()) {
+						JOptionPane.showMessageDialog(null, "Replay is End");
+						replayThread.stop();
 					}
-				replay.clear();
+					replay.clear();
 				}
-		};
+			};
 		}
-		if(!replayThread.isAlive())
-		replayThread.start();
+		if (!replayThread.isAlive())
+			replayThread.start();
 	}
 
 	public List<Integer> getPointListReplay() {
 		return replay;
 	}
-	
+
 	public List<FreezeSquare> getFreezelist() {
 		return freezelist;
 	}
 
 	public Memento save() {
-		System.out.println(turn);
 		return new Memento(players, turn);
 	}
 
