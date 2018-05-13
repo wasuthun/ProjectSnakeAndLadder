@@ -21,10 +21,10 @@ public class Game extends Observable {
 	private static Game game = new Game();
 	private List<Player> players = new ArrayList<Player>();
 	private Player currentPlayer;
-	private Board board;
 	private Dice dice = new Dice();
 	private int turn = 1;
 	private boolean running = true;
+	private List<Square> playerPos=new ArrayList<>();
 	public List<Integer> replay = new ArrayList<Integer>();
 	public List<Integer> replaytmp = new ArrayList<Integer>();
 	private List<Ladder> ladder = new ArrayList<Ladder>();
@@ -68,7 +68,6 @@ public class Game extends Observable {
 	 * Constructor
 	 */
 	private Game() {
-		board = new Board();
 		snake = new ArrayList<>();
 		ladder = new ArrayList<>();
 		snake.add(new Snake(new Square(5, 0), new Square(2, 6)));
@@ -150,9 +149,9 @@ public class Game extends Observable {
 	 * Use to update a position of player
 	 */
 	public void updateBoard() {
-		board.getSquares().clear();
+		playerPos.clear();
 		for (Player player : players) {
-			board.getSquares().add(player.getPosition());
+			playerPos.add(player.getPosition());
 		}
 	}
 
@@ -162,7 +161,7 @@ public class Game extends Observable {
 	 * @return
 	 */
 	public List<Square> getSquares() {
-		return board.getSquares();
+		return playerPos;
 	}
 
 	/**
