@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Observable;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.JOptionPane;
 
 import player.Player;
 import player.PlayerCanNotPlay;
 import player.PlayerCanPlay;
 
+/**
+ * This class is a Game of this project and contain many logic of this game to
+ * perform in GameUI
+ * 
+ * @author Wasuthun and Patcharapol
+ *
+ */
 public class Game extends Observable {
 	private static Game game = new Game();
 	private List<Player> players = new ArrayList<Player>();
@@ -59,6 +64,9 @@ public class Game extends Observable {
 		}
 	};
 
+	/**
+	 * Constructor
+	 */
 	private Game() {
 		board = new Board();
 		snake = new ArrayList<>();
@@ -88,6 +96,9 @@ public class Game extends Observable {
 		updateBoard();
 	}
 
+	/**
+	 * One loop of this game that use to run in game thread
+	 */
 	private void oneGameLoop() {
 		gamelogic();
 		setChanged();
@@ -95,6 +106,9 @@ public class Game extends Observable {
 		delay();
 	}
 
+	/**
+	 * Use to delay a game thread
+	 */
 	private void delay() {
 		try {
 			Thread.sleep(200);
@@ -103,6 +117,10 @@ public class Game extends Observable {
 		}
 	}
 
+	/**
+	 * This method use to perform action when player on a snake tail and bottom of
+	 * ladder and end point of this game
+	 */
 	private void gamelogic() {
 		for (Snake snake : snake) {
 			for (Player player : players) {
@@ -128,6 +146,9 @@ public class Game extends Observable {
 		updateBoard();
 	}
 
+	/**
+	 * Use to update a position of player
+	 */
 	public void updateBoard() {
 		board.getSquares().clear();
 		for (Player player : players) {
@@ -135,14 +156,21 @@ public class Game extends Observable {
 		}
 	}
 
-	public int getBoardSize() {
-		return board.getSize();
-	}
-
+	/**
+	 * Get a list of board that contain player position
+	 * 
+	 * @return
+	 */
 	public List<Square> getSquares() {
 		return board.getSquares();
 	}
 
+	/**
+	 * Use to add player in the game
+	 * 
+	 * @param player
+	 * @return boolean that show a player is add or not
+	 */
 	public boolean addPlayer(Player player) {
 		if (players.size() == 0) {
 			players.add(player);
@@ -155,23 +183,42 @@ public class Game extends Observable {
 		return false;
 	}
 
+	/**
+	 * Get a game singleton object
+	 * 
+	 * @return game object
+	 */
 	public static Game getInstance() {
 		return game;
 	}
 
+	/**
+	 * Start of this game
+	 */
 	public void start() {
 		running = true;
 		gameThread.start();
 	}
 
+	/**
+	 * End of this game
+	 */
 	public void end() {
 		running = false;
 	}
 
+	/**
+	 * Check a game is end or not
+	 * 
+	 * @return result of checking
+	 */
 	public boolean isOver() {
 		return !running;
 	}
 
+	/**
+	 * Use to switch turn of player in player list after player roll dice
+	 */
 	public void switchTurn() {
 		for (int i = 0; i < players.size(); i++) {
 			if (turn % players.size() == i) {
@@ -184,10 +231,18 @@ public class Game extends Observable {
 		turn++;
 	}
 
+	/**
+	 * Access a current player
+	 * 
+	 * @return current player
+	 */
 	public Player getPlayer() {
 		return currentPlayer;
 	}
 
+	/**
+	 * Use to restart a game
+	 */
 	public void restart() {
 		try {
 			currentPlayer = players.get(0);
@@ -215,18 +270,38 @@ public class Game extends Observable {
 		}
 	}
 
+	/**
+	 * Access a dice
+	 * 
+	 * @return dice object
+	 */
 	public Dice getDice() {
 		return dice;
 	}
 
+	/**
+	 * Access a player list
+	 * 
+	 * @return list of player
+	 */
 	public List<Player> getPlayerList() {
 		return players;
 	}
 
+	/**
+	 * Access a BackwordSquare list
+	 * 
+	 * @return backword square list
+	 */
 	public List<BackwardSquare> getBacklist() {
 		return backlist;
 	}
 
+	/**
+	 * Get replay of this game
+	 * 
+	 * @throws InterruptedException
+	 */
 	public void getReplay() throws InterruptedException {
 		if (!replayThread.isAlive()) {
 			replayThread = new Thread() {
@@ -264,18 +339,38 @@ public class Game extends Observable {
 			replayThread.start();
 	}
 
+	/**
+	 * Get list of point dice of replay
+	 * 
+	 * @return get point of dice list
+	 */
 	public List<Integer> getPointListReplay() {
 		return replay;
 	}
 
+	/**
+	 * Access a FreezeSquarList
+	 * 
+	 * @return Use to Access a FreezeSquare List
+	 */
 	public List<FreezeSquare> getFreezelist() {
 		return freezelist;
 	}
 
+	/**
+	 * Save a state as Memento object
+	 * 
+	 * @return Memento save object
+	 */
 	public Memento save() {
 		return new Memento(players, turn);
 	}
 
+	/**
+	 * Use to load state of object from save state
+	 * 
+	 * @param m
+	 */
 	public void load(Memento m) {
 		try {
 			int index = players.indexOf(m.currentPlayerM);
@@ -294,12 +389,25 @@ public class Game extends Observable {
 		}
 	}
 
+	/**
+	 * Inner class Memento that use to write a Memento pattern to save and load a
+	 * program
+	 * 
+	 * @author Wasuthun and Patcharapol
+	 *
+	 */
 	public static class Memento {
 		private List<Player> player = new ArrayList<Player>();
 		private int turn;
 		private Game game = Game.getInstance();
 		private Player currentPlayerM;
 
+		/**
+		 * Constructor
+		 * 
+		 * @param player
+		 * @param turn
+		 */
 		public Memento(List<Player> player, int turn) {
 			for (Player p : player) {
 				Player p1 = new Player();

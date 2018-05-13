@@ -1,21 +1,24 @@
 package game;
+
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Board class this use to collect a list of position of player
+ * 
+ * @author Wasuthun and Patcharapol
+ *
+ */
 public class Board {
-	private int size = 10;
 	private List<Square> square = new ArrayList<Square>();
 
-	public int getSize() {
-		return size;
-	}
-
+	/**
+	 * Get list of position player
+	 * 
+	 * @return list of position of player
+	 */
 	public List<Square> getSquares() {
 		return square;
-	}
-
-	public void addBlock(Square block) {
-		square.add(block);
 	}
 
 }

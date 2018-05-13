@@ -1,4 +1,5 @@
 package gameui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import player.Player;
 
+/**
+ * This class is a UI of player that can roll dice and show text of turn and
+ * notify when game is end
+ * 
+ * @author Wasuthun and Patcharapol
+ *
+ */
 public class PlayerUIController {
 	@FXML
 	private Button roll;
@@ -35,11 +43,17 @@ public class PlayerUIController {
 	private Player player;
 	private List<Integer> replay = new ArrayList<Integer>();
 
+	/**
+	 * Use to initialize some event on button
+	 */
 	@FXML
 	public void initialize() {
 		roll.setOnAction(this::handleRoll);
 	}
-
+	/**
+	 * Use to roll a dice and show face of dice
+	 * @param event
+	 */
 	@FXML
 	public void handleRoll(ActionEvent event) {
 		player = game.getPlayer();
@@ -53,19 +67,19 @@ public class PlayerUIController {
 		setFace(face1, firstDie);
 		setFace(face2, secondDie);
 		try {
-			for(Player p:game.getPlayerList())
-			if ((p.getPosition().getX() == 0 && p.getPosition().getY() == 0)) {
-				textField1.setText("");
-				textField2.setText("");
-				textField3.setText("");
-				face1.setImage(null);
-				face2.setImage(null);
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Winner of this game");
-				alert.setHeaderText("Winner is player "+(game.getPlayerList().indexOf(p) + 1));
-				alert.showAndWait();
-				return;
-			}
+			for (Player p : game.getPlayerList())
+				if ((p.getPosition().getX() == 0 && p.getPosition().getY() == 0)) {
+					textField1.setText("");
+					textField2.setText("");
+					textField3.setText("");
+					face1.setImage(null);
+					face2.setImage(null);
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Winner of this game");
+					alert.setHeaderText("Winner is player " + (game.getPlayerList().indexOf(p) + 1));
+					alert.showAndWait();
+					return;
+				}
 
 			player.move(point);
 		} catch (NullPointerException e) {
@@ -84,7 +98,11 @@ public class PlayerUIController {
 		game.replay = replay;
 		game.switchTurn();
 	}
-
+	/**
+	 * Use to set a face of die
+	 * @param face
+	 * @param point
+	 */
 	private void setFace(ImageView face, int point) {
 		if (point == 1)
 			face.setImage(new Image("Image/1.png"));

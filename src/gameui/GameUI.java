@@ -20,7 +20,11 @@ import javax.swing.JPanel;
 import game.Game;
 import game.Square;
 import player.Player;
-
+/**
+ * This class is a UI class of game that have a many function of this game that we build for user in UI
+ * @author Wasuthun and Patcharapol
+ *
+ */
 public class GameUI implements Observer {
 	private JFrame frame;
 	private String[] item = { "Add player","Save","Load", "Restart", "Replay" };
@@ -29,7 +33,10 @@ public class GameUI implements Observer {
 	private Image player1, player2, player3, player4;
 	private List<Image> players = new ArrayList<Image>();
 	private Game.Memento m;
-
+	/**
+	 * Constructor
+	 * @param game
+	 */
 	public GameUI(Game game) {
 		game.addObserver(this);
 
@@ -118,31 +125,48 @@ public class GameUI implements Observer {
 		frame.setSize(750, 810);
 		renderer.requestFocus();
 	}
+	/**
+	 * Use to update new position of player to GameUI
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 			renderer.repaint();
 	}
-
+	/**
+	 * This class use to draw a picture of player and board to UI
+	 * @author Wasuthun and Patcharapol
+	 *
+	 */
 	class Renderer extends JPanel {
 		private Game game;
 		private int blockWidth = 75;
-
+		/**
+		 * Constructor
+		 */
 		public Renderer() {
 			game = Game.getInstance();
 			setDoubleBuffered(true);
 		}
-
+		/**
+		 * Paint map and players
+		 */
 		@Override
 		public void paint(Graphics g) {
 			super.paint(g);
 			paintMap(g);
 			paintBlocks(g);
 		}
-
+		/**
+		 * Use to draw a map
+		 * @param g
+		 */
 		private void paintMap(Graphics g) {
 			g.drawImage(image, 0, 0, null);
 		}
-
+		/**
+		 * Use to draw a players
+		 * @param g
+		 */
 		private void paintBlocks(Graphics g) {
 			int picker = 0;
 			List<Square> squares = game.getSquares();
