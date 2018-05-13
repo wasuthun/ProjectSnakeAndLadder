@@ -1,6 +1,8 @@
 # Snake and ladder :snake:
  Snake and ladder game is a kind of board game for more than 2 players.In our snake and ladder game it's have 2 mainly parts for playing.
- First one is game board which have 100 blocks and another is a controller of players which player can roll dices for move them self in game board.
+ First one is game board which have 100 blocks and another is a controller of players which player can roll dices for move them self in game board.<br>
+<img src="https://github.com/wasuthun/ProjectSnakeAndLadder/blob/master/src/8153987.jpg" width="375" height="375"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*(Snake and ladder game board)*
  ## Rules :speech_balloon:
  * **Basic rules** 
 1. Player will walk by point of dices.
