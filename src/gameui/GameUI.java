@@ -1,4 +1,5 @@
 package gameui;
+
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -20,21 +21,26 @@ import javax.swing.JPanel;
 import game.Game;
 import game.Square;
 import player.Player;
+
 /**
- * This class is a UI class of game that have a many function of this game that we build for user in UI
+ * This class is a UI class of game that have a many function of this game that
+ * we build for user in UI
+ * 
  * @author Wasuthun and Patcharapol
  *
  */
 public class GameUI implements Observer {
 	private JFrame frame;
-	private String[] item = { "Add player","Save","Load", "Restart", "Replay" };
+	private String[] item = { "Add player", "Save", "Load", "Restart", "Replay" };
 	private Renderer renderer = new Renderer();
 	private Image image;
 	private Image player1, player2, player3, player4;
 	private List<Image> players = new ArrayList<Image>();
 	private Game.Memento m;
+
 	/**
 	 * Constructor
+	 * 
 	 * @param game
 	 */
 	public GameUI(Game game) {
@@ -102,16 +108,16 @@ public class GameUI implements Observer {
 				});
 			} else if (x.equals("Save")) {
 				mitem.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						m = game.save();
 						renderer.requestFocus();
 					}
 				});
-			} else if(x.equals("Load")) {
+			} else if (x.equals("Load")) {
 				mitem.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						game.load(m);
@@ -125,21 +131,25 @@ public class GameUI implements Observer {
 		frame.setSize(750, 810);
 		renderer.requestFocus();
 	}
+
 	/**
 	 * Use to update new position of player to GameUI
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-			renderer.repaint();
+		renderer.repaint();
 	}
+
 	/**
 	 * This class use to draw a picture of player and board to UI
+	 * 
 	 * @author Wasuthun and Patcharapol
 	 *
 	 */
 	class Renderer extends JPanel {
 		private Game game;
 		private int blockWidth = 75;
+
 		/**
 		 * Constructor
 		 */
@@ -147,6 +157,7 @@ public class GameUI implements Observer {
 			game = Game.getInstance();
 			setDoubleBuffered(true);
 		}
+
 		/**
 		 * Paint map and players
 		 */
@@ -156,15 +167,19 @@ public class GameUI implements Observer {
 			paintMap(g);
 			paintBlocks(g);
 		}
+
 		/**
 		 * Use to draw a map
+		 * 
 		 * @param g
 		 */
 		private void paintMap(Graphics g) {
 			g.drawImage(image, 0, 0, null);
 		}
+
 		/**
 		 * Use to draw a players
+		 * 
 		 * @param g
 		 */
 		private void paintBlocks(Graphics g) {
