@@ -42,7 +42,7 @@ public class Player {
 			return;
 		// เดินทางขวาแบบไม่เปลี่ยนแถว
 		if (position.getX() + point < 10 && position.getY() % 2 == 0) {
-			position = new Square(position.getX() + point, 0);
+			position = new Square(position.getX() + point, position.getY());
 		}
 		// ขวาเปลี่ยนแถว
 		else if (position.getX() + point > 9 && position.getY() % 2 == 0 && position.getX() + point < 20) {
