@@ -8,24 +8,35 @@ import game.FreezeSquare;
 import game.Game;
 import game.Square;
 
+/**
+ * Player class which have state and position of player.
+ * @author Wasuthan, Patcharapol
+ *
+ */
 public class Player {
 	private PlayerState state;
 	private Square position;
-	private Square oldPosition;
 	private boolean freezeBool = true;
 	private Game game = Game.getInstance();
 	private List<Square> replay = new ArrayList<Square>();
 
 	public Player() {
 		this.state = new PlayerCanPlay(this);
-		oldPosition = new Square(0, 9);
 		position = new Square(0, 9);
 	}
 
+	/**
+	 * Set player state.
+	 * @param state is state that you want to set.
+	 */
 	public void setState(PlayerState state) {
 		this.state = state;
 	}
 
+	/**
+	 * Move player backward by points.
+	 * @param point is point of dices.
+	 */
 	public void moveBackWord(int point) {
 		if (this.state.isTurn() == false)
 			return;
@@ -64,8 +75,11 @@ public class Player {
 		replay.add(position);
 	}
 
+	/**
+	 * Move player forward.
+	 * @param point is points of dices.
+	 */
 	public void move(int point) {
-		oldPosition = new Square(this.position.getX(), this.position.getY());
 		if (this.state.isTurn() == false)
 			return;
 		for (FreezeSquare freeze : game.getFreezelist()) {
@@ -133,26 +147,39 @@ public class Player {
 		replay.add(position);
 	}
 
+	/**
+	 * Set player position.
+	 * @param square is player new position.
+	 */
 	public void setPosition(Square square) {
 		this.position = square;
 	}
 
+	/**
+	 * @return Player current position.
+	 */
 	public Square getPosition() {
 		return position;
 	}
 
-	public Square getOldPosition() {
-		return oldPosition;
-	}
-
+	/**
+	 * @return position that player has moved p
+	 */
 	public List<Square> getReplay() {
 		return replay;
 	}
 
+	/**
+	 * Set Player is freeze or not.
+	 * @param freezeBool is status that player is freezing or not.
+	 */
 	public void setFreezeBool(boolean freezeBool) {
 		this.freezeBool = freezeBool;
 	}
 
+	/**
+	 * @return Status that player is freezing or not.
+	 */
 	public boolean getFreezeBool() {
 		return freezeBool;
 	}

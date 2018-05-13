@@ -1,5 +1,10 @@
 package game;
 
+/**
+ * This class contain positon of snake.
+ * @author mark
+ *
+ */
 public class Snake {
 
 	private Square head;
@@ -10,10 +15,16 @@ public class Snake {
 		this.tail = tail;
 	}
 	
+	/**
+	 * @return Square which is a head of snake.
+	 */
 	public Square getHead() {
 		return head;
 	}
 	
+	/**
+	 * @return Square which is a tail of snake.
+	 */
 	public Square getTail() {
 		return tail;
 	}
