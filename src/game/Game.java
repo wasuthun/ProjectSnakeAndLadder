@@ -24,7 +24,7 @@ public class Game extends Observable {
 	private Dice dice = new Dice();
 	private int turn = 1;
 	private boolean running = true;
-	private List<Square> playerPos=new ArrayList<>();
+	private List<Square> playerPos = new ArrayList<>();
 	public List<Integer> replay = new ArrayList<Integer>();
 	public List<Integer> replaytmp = new ArrayList<Integer>();
 	private List<Ladder> ladder = new ArrayList<Ladder>();
@@ -324,10 +324,11 @@ public class Game extends Observable {
 
 						}
 					} catch (ConcurrentModificationException e) {
-						JOptionPane.showMessageDialog(null, "Dont press restart during replay");
+						JOptionPane.showMessageDialog(null, "Dont press restart and roll dice during replay");
+						game.restart();
 					}
 					if (replayThread.isAlive()) {
-						JOptionPane.showMessageDialog(null, "Replay is End");
+						JOptionPane.showMessageDialog(null, "Replay is end please restart or exit program");
 						replayThread.stop();
 					}
 					replay.clear();
